@@ -1,0 +1,10 @@
+name: game-sale-anlysis
+
+dependencies:
+  - python=3.8
+  - numpy
+  - matplotlib
+  - pandas
+  - kaggle
+  - pip:
+    - git+https://github.com/blaze/dask.git#egg=dask[complete]
