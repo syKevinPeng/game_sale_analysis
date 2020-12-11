@@ -1,3 +1,5 @@
+<div align='center'> <font size='70'>Game Sale Analysis</font> </div>
+
 #### Siyuan "Kevin" Peng， Yuanzhe "Siris" Zheng, Yanlin "Jacky" Liu
 ![Image of Yaktocat](https://cdn.mos.cms.futurecdn.net/rLh7Dh7EKo8F6zmDtXYp8W.jpg)
 # Table of Contents
@@ -39,7 +41,7 @@ import kaggle
 
 or directly download from kaggle webpage: [https://www.kaggle.com/ashaheedq/video-games-sales-2019](https://www.kaggle.com/ashaheedq/video-games-sales-2019)_
 ## 4. Preprocessing <a name="preprocessing"></a>
-### Load and Clean Data <a name="load-and-clean"></a>
+### 4.a Load and Clean Data <a name="load-and-clean"></a>
 
 
 ```python
@@ -245,7 +247,7 @@ df.head()
 
 
 
-### Data Analysis and Visualization' <a name="data-ana-vis"></a>
+### 4.b Data Analysis and Visualization' <a name="data-ana-vis"></a>
 
 
 ```python
@@ -253,21 +255,21 @@ df.head()
 ```
 
 ## 5. Machine Learning Model <a name="ml-model"></a>
-### What and Why <a name="what-why"></a>
+### 5.a What and Why <a name="what-why"></a>
 
 
 ```python
 #TODO:
 ```
 
-### Training <a name="training"></a>
+### 5.b Training <a name="training"></a>
 
 
 ```python
 #TODO:
 ```
 
-### Result Anlysis and Demonstration <a name="result-ana-demon"></a>
+### 5.6 Result Anlysis and Demonstration <a name="result-ana-demon"></a>
 TODO:
 ## 6. Future Application <a name="future-app"></a>
 TODO:
