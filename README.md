@@ -1,3 +1,4 @@
+<body>
 <div align='center'> <font size='70'>Game Sale Analysis</font> </div>
 
 #### Siyuan "Kevin" Peng， Yuanzhe "Siris" Zheng, Yanlin "Jackey" Liu
@@ -76,3 +77,4 @@ TODO:
 TODO:
 ## 7. Reference and External Link <a name="ref-and-extlink"></a>
 TODO:
+</body>
