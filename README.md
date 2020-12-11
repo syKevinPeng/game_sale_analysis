@@ -1,5 +1,3 @@
-<div align='center'> <font size='70'>Game Sale Analysis</font> </div>
-
 #### Siyuan "Kevin" Peng， Yuanzhe "Siris" Zheng, Yanlin "Jacky" Liu
 ![Image of Yaktocat](https://cdn.mos.cms.futurecdn.net/rLh7Dh7EKo8F6zmDtXYp8W.jpg)
 # Table of Contents
