@@ -1,6 +1,4 @@
-<div align='center'> <font size='70'>Game Sale Analysis</font> </div>
-
-#### Siyuan "Kevin" Peng， Yuanzhe "Siris" Zheng, Yanlin "Jacky" Liu
+#### Siyuan "Kevin" Peng, Yuanzhe "Siris" Zheng, Yanlin "Jacky" Liu
 ![Image of Yaktocat](https://cdn.mos.cms.futurecdn.net/rLh7Dh7EKo8F6zmDtXYp8W.jpg)
 # Table of Contents
 1. [Introduction](#introduction)
@@ -269,7 +267,7 @@ df.head()
 #TODO:
 ```
 
-### 5.6 Result Anlysis and Demonstration <a name="result-ana-demon"></a>
+### 5.c Result Anlysis and Demonstration <a name="result-ana-demon"></a>
 TODO:
 ## 6. Future Application <a name="future-app"></a>
 TODO:
