@@ -39,7 +39,7 @@ import kaggle
 
 or directly download from kaggle webpage: [https://www.kaggle.com/ashaheedq/video-games-sales-2019](https://www.kaggle.com/ashaheedq/video-games-sales-2019)_
 ## 4. Preprocessing <a name="preprocessing"></a>
-### Load and Clean Data <a name="load-and-clean"></a>
+### 4.a. Load and Clean Data <a name="load-and-clean"></a>
 
 
 ```python
@@ -741,7 +741,7 @@ df.shape
 
 
 
-### Data Analysis and Visualization' <a name="data-ana-vis"></a>
+### 4.b Data Analysis and Visualization' <a name="data-ana-vis"></a>
 
 
 ```python
@@ -759,7 +759,7 @@ Games in ">10" category are expected to sell so greate that its name will left i
 Games in "5-10" category are sold less than the top ones, but they are still great games. "5-1" games are good games. there are still large amount of customer want to
 put them into their gaming library. The rest of games can be put into "1-0" categories. We respect the efforts that game developers put into them but they are relatively
 niche.
-### What and Why <a name="what-why"></a>
+### 5.a What and Why <a name="what-why"></a>
 
 We want to use *multiple linear regression* for predicting numerical sale number. The reason is that we intend to investigate
 how strong the relationship is between many independent variables (in this case, critic score, developers and other variables) and
@@ -777,20 +777,20 @@ Several models will be used for the prediction of categorical sale number: *Rand
 
 Single decision tree suffers from a high variance, which makes them less accurate than other models. However, random forest fixes
 this problem. Benefits of using random forests:
- -  bagging and bootstrap reduce the output variance
+ -  Bagging and bootstrap reduce the output variance
  -  Able to handle large dataset with high dimensionality (which is our datset)
 
 k-nearest neightbors, as one of the most famous classifications algorithm, surely have many positive sides:
  - No training period
  - Easily to add new data
- - easy to implement
+ - Easy to implement
 
 Here is the advantages of choosing support vector machine as one of our algorithem.
  -  Effective in high dimensional spaces
  -  Use a subset of training set in the decision function and, therefore, prevent overfitting
- -  memory efficient
+ -  Memory efficient
 
-### Training <a name="training"></a>
+### 5.b Training <a name="training"></a>
 
 
 ```python
@@ -806,6 +806,7 @@ TODO:
  - https://www.scribbr.com/statistics/multiple-linear-regression/
  - https://en.wikipedia.org/wiki/Linear_regression
  - https://towardsdatascience.com/understanding-multiple-regression-249b16bde83e
+ 
 #### Extend materials for support vector machine
  - https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47
  - https://www.youtube.com/watch?v=1NxnPkZM9bc
