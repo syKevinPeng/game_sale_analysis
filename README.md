@@ -773,7 +773,7 @@ multiple categories. Therefore, we also hope to perform *multiple nonlinear regr
 instead of a line for the data.
 
 Several models will be used for the prediction of categorical sale number: *Random forest*, *k-nearest neighbors* (KNN) and
-*Support vector machine*(Support vector machine
+*Support vector machine*(SVM)
 
 Single decision tree suffers from a high variance, which makes them less accurate than other models. However, random forest fixes
 this problem. Benefits of using random forests:
@@ -783,7 +783,7 @@ this problem. Benefits of using random forests:
 k-nearest neightbors, as one of the most famous classifications algorithm, surely have many positive sides:
  - No training period
  - Easily to add new data
- - easy to implement 
+ - easy to implement
 
 Here is the advantages of choosing support vector machine as one of our algorithem.
  -  Effective in high dimensional spaces
