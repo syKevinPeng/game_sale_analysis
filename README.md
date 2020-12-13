@@ -761,7 +761,34 @@ put them into their gaming library. The rest of games can be put into "1-0" cate
 niche.
 ### What and Why <a name="what-why"></a>
 
+We want to use *multiple linear regression* for predicting numerical sale number. The reason is that we intend to investigate
+how strong the relationship is between many independent variables (in this case, critic score, developers and other variables) and
+one dependent variable -- sale score. We made several assumptions for using multiple linear regression.
+ - Homogeneity of Variance: the size of the error in our prediction doesn't change a lot
+ - Independence of Observations: each game is independent of others.
+ - Linearity: the line of best fit through the data point is a straight line.
 
+However, one noticeable issue is that there is no way we can check the linearity due to the fact that we have
+multiple categories. Therefore, we also hope to perform *multiple nonlinear regression*, i.e. we will fit a curve
+instead of a line for the data.
+
+Several models will be used for the prediction of categorical sale number: *Random forest*, *k-nearest neighbors* (KNN) and
+*Support vector machine*(Support vector machine
+
+Single decision tree suffers from a high variance, which makes them less accurate than other models. However, random forest fixes
+this problem. Benefits of using random forests:
+ -  bagging and bootstrap reduce the output variance
+ -  Able to handle large dataset with high dimensionality (which is our datset)
+
+k-nearest neightbors, as one of the most famous classifications algorithm, surely have many positive sides:
+ - No training period
+ - Easily to add new data
+ - easy to implement 
+
+Here is the advantages of choosing support vector machine as one of our algorithem.
+ -  Effective in high dimensional spaces
+ -  Use a subset of training set in the decision function and, therefore, prevent overfitting
+ -  memory efficient
 
 ### Training <a name="training"></a>
 
@@ -775,4 +802,10 @@ TODO:
 ## 6. Future Application <a name="future-app"></a>
 TODO:
 ## 7. Reference and External Link <a name="ref-and-extlink"></a>
-TODO:
+#### Want to to know more about multiple linear regression?
+ - https://www.scribbr.com/statistics/multiple-linear-regression/
+ - https://en.wikipedia.org/wiki/Linear_regression
+ - https://towardsdatascience.com/understanding-multiple-regression-249b16bde83e
+#### Extend materials for support vector machine
+ - https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47
+ - https://www.youtube.com/watch?v=1NxnPkZM9bc
