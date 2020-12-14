@@ -19,9 +19,9 @@ TODO:
 
 ## 2. Install Packages <a name="install-pkg"></a>
 ```
-pip install kaggle numpy matplotlib pandas
+pip install kaggle numpy matplotlib pandas sklearn
 ```
-or use environment.yml to install packages in conda environment
+or use [environment.yml](https://github.com/syKevinPeng/game_sale_analysis/blob/main/environment.yml) to install packages in Conda environment
 ```
 conda env update -f environment.yml
 ```
@@ -43,13 +43,11 @@ or directly download from kaggle webpage: [https://www.kaggle.com/ashaheedq/vide
 
 
 ```python
-#TODO:
 import pandas as pd
 import numpy as np
 import sklearn
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import LabelEncoder
 import locale
 
 locale.setlocale( locale.LC_ALL, 'en_US.UTF-8' ) 
@@ -768,7 +766,7 @@ one dependent variable -- sale score. We made several assumptions for using mult
  - Independence of Observations: each game is independent of others.
  - Linearity: the line of best fit through the data point is a straight line.
 
-However, one noticeable issue is that there is no way we can check the linearity due to the fact that we have
+However, one potential issue is that there is no way we can check the linearity due to the fact that we have
 multiple categories. Therefore, we also hope to perform *multiple nonlinear regression*, i.e. we will fit a curve
 instead of a line for the data.
 
@@ -791,11 +789,48 @@ Here is the advantages of choosing support vector machine as one of our algorith
  -  Memory efficient
 
 ### 5.b Training <a name="training"></a>
+**Multiple Linear Regression**
+We will use sklearn library for most of our training task. Non-linear regression is little bit tricky and we wish to use scipy library for training.
 
 
 ```python
-#TODO:
+from sklearn import linear_model, model_selection
+from scipy.optimize import curve_fit
+import sklearn
+
+# build model for numerical predictors
+muti_linear_regression = linear_model.LinearRegression(normalize=False,n_jobs=-1)
+muti_linear_regression_normalized = linear_model.LinearRegression(normalize=True,n_jobs=-1)
 ```
+
+Explanation:
+
+As for multiple linear regression, we have two models. One is non-modified x value and the other one is normalized x. Typically, we want to let each regressor have
+equal impact on the prediction so normalized is needed. Let's check the validation accuracy to see if it fits the hypothesis. The parameter "n_jobs = -1" means we want
+all processors to participate the computation given that we have relatively large dataset and many regressors.
+
+
+```python
+# build model for categorical predictors
+random_forest = sklearn.ensemble.RandomForestClassifier(n_estimators = 1000, random_state=42,max_depth=4,n_jobs = -1)
+knn = sklearn.neighbors.KNeighborsClassifier(n_neighbors=5)
+svm = sklearn.svm.LinearSVC()
+```
+
+Explanation:
+
+To determine the number of trees (n_estimators in the function), we theoretically want as many trees as possible but the
+margin of accuracy of getting more than 1000 trees become neglectable. random_state will increase the randomness when the algorithm is
+bootstrapping.It is suggested that the maximum depth of the tree is sqrt(number of features), and also the
+more depth of a tree, the better it perform with diminishing returns. I will just choose 4 and the benefit of more than 4 is too small. The number of jobs indicates how many
+threads that are working in parallel.
+
+As for kNN, to determine the number of neighbors, I did several experiments. It turns out that n_neightbors = 5 can generate best output. Too small n_neightbor will result in
+unstable decision boundaries will too large will make the decision boundaries unclear.
+
+SVM is little bit intriguing. There are two options for us to set the "decision_function_shape". One is "ovo", which stands for one-verses-one, and the other option is called one-vs-the-rest.
+One-verse-one compare each classcifier with the predict value one by one while the one verse the rest option treats the x as a group and compare it with the y. In our case, we consider all the regressor
+as a group.
 
 ### Result Anlysis and Demonstration <a name="result-ana-demon"></a>
 TODO:
@@ -806,7 +841,7 @@ TODO:
  - https://www.scribbr.com/statistics/multiple-linear-regression/
  - https://en.wikipedia.org/wiki/Linear_regression
  - https://towardsdatascience.com/understanding-multiple-regression-249b16bde83e
- 
+
 #### Extend materials for support vector machine
  - https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47
  - https://www.youtube.com/watch?v=1NxnPkZM9bc
