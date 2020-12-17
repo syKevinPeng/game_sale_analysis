@@ -19,7 +19,7 @@ Have you dreamed about holding a Great Sword fight against a giant ancient drago
 Have you dreamed about driving Bugatti Veyron Super Sport in the city and all your opponents are in your rear mirror?
 Playing video games seems to be a more and more popular entertainment options for people, especially in the middle of pandemic.
 Gaming market values are almost double from 2012 to 2020. It's now a 150 billion industry with almost 10 thousands of game produced each year.
-In this project, we are interested in what makes a game popular and how much revenue it may generate. 
+In this project, we are interested in what makes a game popular and how much revenue it may generate.
 
 ## 2. Install Packages <a name="install-pkg"></a>
 ```
@@ -46,12 +46,13 @@ or directly download from kaggle webpage: [https://www.kaggle.com/ashaheedq/vide
 In this section, we will load and process the two datasets: "vgsales-12-4-2019.csv" is our main dataset and "video_games.csv"
 is a complementary dataset we will use to fill in  important missing values like "Global_Sales" and "Critic_Score" in the first dataset.
 **Datasets**
+
 "vgsales-12-4-2019.csv" is a kaggle dataset with around 50000 records of game sales collected in 2019.
 There are missing values in the column "Global_Sales", since this column is the predicted value for our model training,
 we load another dataset "video_games.csv" to fill in these values as many as possible and drop the rest N/A values.
 
 "video_games.csv" is a dataset of Steam game sales,
- we load it from [Github](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-30).
+ we load it from [this repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-30).
  It has a cloumn "owners" which includes a range of the number of players that own each game,
  we take the expected value (or median) of every range as the replacement for the missing data in the first dataset,
  and we will do the same for the missing values in "Critic_Score". To merge the two datasets after doing necessary
@@ -69,7 +70,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn import preprocessing
 import locale
 
-locale.setlocale( locale.LC_ALL, 'en_US.UTF-8' ) 
+locale.setlocale( locale.LC_ALL, 'en_US.UTF-8' )
 df = pd.read_csv("vgsales-12-4-2019.csv")
 additional = pd.read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-30/video_games.csv")
 df.head()
@@ -358,6 +359,7 @@ additional.head()
 
 
 **Clean the additional dataset**
+
 Let's process the additional dataset. First, we drop rows with NaN values in the columns "owners" and "release_date"
 because we do not want to have missing values in these columns, and reset the index of the dataframe. Next, we divide
 the values in the column "metascore" by 10 to make the unit (a float with one decimal place) match in both tables, and
@@ -472,6 +474,7 @@ additional.head()
 
 
 **Merge the main dataset and the additional dataset**
+
 Before merging the two datasets, we drop rows having missing values in the column "Year" as we will use this column
 and the column "Name" in merging. Then we drop columns we will not use in data visualization and data analysis, which
 are 'Rank', 'basename', 'Total_Shipped', 'Platform', 'Publisher', 'VGChartz_Score', 'Last_Update', 'url', 'status',
@@ -483,7 +486,7 @@ The type of join we choose is left join, because we do not want to add excessive
 ```python
 df = df.dropna(subset = ['Year'])
 df['Year'] = df['Year'].astype(int)
-df = df.drop(columns=['Rank', 'basename', 'Total_Shipped', 'Platform', 'Publisher', 'VGChartz_Score', 
+df = df.drop(columns=['Rank', 'basename', 'Total_Shipped', 'Platform', 'Publisher', 'VGChartz_Score',
                       'Last_Update', 'url', 'status', 'Vgchartzscore', 'img_url',  'User_Score'])
 # left join on 'Name', 'Year'
 pd.merge(df, additional, on = ['Name', 'Year'] , how = 'left')
@@ -602,6 +605,7 @@ df.head()
 
 
 **Process the merged dataset**
+
 First we drop rows with missing values in the columns "Developer" and "Genre", and reset the index.
 It is obvious to predict sales as numerical data but we have the accuracy concern(we will see accuracy in the **Result Analysis and Demonstration** section)
 since the data may not demonstrate a strong linear trend. Therefore, we hope to predict it as categorical data: sale score is divided into 4 categories.
@@ -644,6 +648,7 @@ df['ESRB_Rating'] = le.fit_transform(df['ESRB_Rating'])
 ```
 
 **Dataframe for data visualization**
+
 Now we create the dataframe for data visualization. We drop rows with NaN values in the columns "Global_Sales"
 and "NA_Sales" because these missing values can not be used in plotting the graphs.
 
@@ -774,6 +779,7 @@ df_for_visualization.head()
 
 
 **Dataframe for data analysis**
+
 To create the dataframe for data analysis, we need to drop columns that we will not use,
 which are 'Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'. Also, we will normalize
 the numerical values in the columns "Global_Sales" and "NA_Sales" by using the sklearn.preprocessing module.
@@ -833,53 +839,53 @@ df_for_training
   </thead>
   <tbody>
     <tr>
-      <th>7195</th>
-      <td>2</td>
+      <th>3153</th>
+      <td>7</td>
       <td>0</td>
-      <td>1627</td>
-      <td>0.008197</td>
-      <td>2005</td>
-      <td>0.006401</td>
+      <td>1772</td>
+      <td>0.017418</td>
+      <td>2007</td>
+      <td>0.024126</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>8611</th>
-      <td>11</td>
+      <th>7407</th>
+      <td>17</td>
       <td>0</td>
-      <td>999</td>
-      <td>0.007172</td>
-      <td>2009</td>
-      <td>0.003939</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>8738</th>
-      <td>2</td>
-      <td>5</td>
-      <td>729</td>
-      <td>0.007172</td>
-      <td>1997</td>
-      <td>0.003939</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>6318</th>
-      <td>13</td>
-      <td>5</td>
-      <td>1535</td>
-      <td>0.007172</td>
+      <td>937</td>
+      <td>0.010246</td>
       <td>2002</td>
-      <td>0.008863</td>
+      <td>0.005908</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>10589</th>
-      <td>10</td>
-      <td>1</td>
-      <td>1489</td>
-      <td>0.003074</td>
-      <td>2008</td>
+      <th>10654</th>
+      <td>15</td>
+      <td>0</td>
+      <td>695</td>
+      <td>0.002049</td>
+      <td>2002</td>
       <td>0.000985</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9829</th>
+      <td>0</td>
+      <td>3</td>
+      <td>1558</td>
+      <td>0.004098</td>
+      <td>2007</td>
+      <td>0.001969</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7877</th>
+      <td>0</td>
+      <td>5</td>
+      <td>331</td>
+      <td>0.010246</td>
+      <td>2016</td>
+      <td>0.005416</td>
       <td>1</td>
     </tr>
     <tr>
@@ -893,52 +899,52 @@ df_for_training
       <td>...</td>
     </tr>
     <tr>
-      <th>689</th>
-      <td>17</td>
+      <th>3049</th>
       <td>0</td>
-      <td>492</td>
-      <td>0.087090</td>
-      <td>2001</td>
-      <td>0.084687</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3353</th>
-      <td>10</td>
-      <td>5</td>
-      <td>1813</td>
-      <td>0.014344</td>
-      <td>2007</td>
-      <td>0.022649</td>
+      <td>3</td>
+      <td>1412</td>
+      <td>0.009221</td>
+      <td>2005</td>
+      <td>0.025111</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>3879</th>
-      <td>15</td>
+      <th>5429</th>
+      <td>7</td>
+      <td>3</td>
+      <td>1807</td>
+      <td>0.012295</td>
+      <td>2002</td>
+      <td>0.011324</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7101</th>
       <td>5</td>
-      <td>460</td>
+      <td>1</td>
+      <td>1271</td>
       <td>0.013320</td>
-      <td>2006</td>
-      <td>0.019202</td>
+      <td>2007</td>
+      <td>0.006893</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>8249</th>
+      <th>11286</th>
+      <td>7</td>
       <td>2</td>
-      <td>5</td>
-      <td>1878</td>
-      <td>0.005123</td>
-      <td>2009</td>
-      <td>0.004431</td>
+      <td>125</td>
+      <td>0.001025</td>
+      <td>2005</td>
+      <td>0.000000</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>3749</th>
-      <td>12</td>
+      <th>3721</th>
       <td>0</td>
-      <td>329</td>
-      <td>0.020492</td>
-      <td>2003</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0.032787</td>
+      <td>2009</td>
       <td>0.020187</td>
       <td>1</td>
     </tr>
@@ -949,10 +955,7 @@ df_for_training
 
 
 
-
-```python
 ### 4.b Data Analysis and Visualization' <a name="data-ana-vis"></a>
-```
 
 ## 5. Machine Learning Model <a name="ml-model"></a>
 In this section, we are going to implement several models and predict global sales. In the world of machine learning, people
@@ -988,7 +991,8 @@ Here is the advantages of choosing support vector machine as one of our algorith
 
 ### 5.b Training <a name="training"></a>
 **Multiple Linear Regression**
-We will use sklearn library for most of our training task. Non-linear regression is little bit tricky and we wish to use scipy library for training.
+
+We will use sklearn library for most of our training task.
 
 
 ```python
@@ -1003,6 +1007,8 @@ muti_linear_regression = linear_model.LinearRegression(n_jobs=-1)
 Explanation:
 
 This is a very simple and straight-forward model with n_jobs = -1, which means we want to use all available CPU cores for efficiency purpose
+
+**Categorical Model**
 
 
 ```python
@@ -1051,8 +1057,8 @@ print('The average score for linear regression is ',np.average(linear_score))
 print("The standard error of the score is ", np.std(linear_score))
 ```
 
-    The average score for linear regression is  0.8367418408832545
-    The standard error of the score is  0.047547289150065765
+    The average score for linear regression is  0.8329380526739645
+    The standard error of the score is  0.044375140974953854
     
 
 
@@ -1070,16 +1076,16 @@ print("The average score for SVM is ", np.average(svm_score))
 print("The standard error of the score is ", np.std(svm_score))
 ```
 
-    The average score for Random Forest is  0.9439547351001096
-    The standard error of the score is  0.004910405559656223
-    The average score for kNN is  0.8736344000808025
-    The standard error of the score is  0.007545701430274152
-    The average score for SVM is  0.8927563729032159
-    The standard error of the score is  0.016480349907004876
+    The average score for Random Forest is  0.9443951860398265
+    The standard error of the score is  0.006578077092256287
+    The average score for kNN is  0.8731059988035025
+    The standard error of the score is  0.005475860780734276
+    The average score for SVM is  0.8992760413024732
+    The standard error of the score is  0.01149247828173759
     
 
-### Result Anlysis and Demonstration <a name="result-and-demon"></a>
-Below is the bar graph of accuracy score for different models
+### 5.c Result Anlysis and Demonstration <a name="result-and-demon"></a>
+Below is the bar graph of accuracy score for different models.
 
 
 ```python
@@ -1122,16 +1128,10 @@ print("paired t-test for  multi-linear regression has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
-    paired t-test for random multi-linear regression is 
+    paired t-test for  multi-linear regression has the following result
+    test statistics = 0.0 
+    p value = 1.0
     
-    
-
-
-
-
-    Ttest_relResult(statistic=4.4074315837987435e-15, pvalue=0.9999999999999964)
-
-
 
 
 ```python
@@ -1142,16 +1142,10 @@ print("paired t-test for random forest  has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
-    paired t-test for random forest result is 
+    paired t-test for random forest  has the following result
+    test statistics = 7.85 
+    p value = 0.0
     
-    
-
-
-
-
-    Ttest_relResult(statistic=7.850346071632364, pvalue=4.521802710394617e-15)
-
-
 
 
 ```python
@@ -1162,16 +1156,10 @@ print("paired t-test for k-nearest neightbor has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
-    paired t-test for k nearest neighbor result is 
+    paired t-test for k-nearest neightbor has the following result
+    test statistics = 22.912 
+    p value = 0.0
     
-    
-
-
-
-
-    Ttest_relResult(statistic=22.891796775482938, pvalue=2.0325341851847787e-113)
-
-
 
 
 ```python
@@ -1182,16 +1170,10 @@ print("paired t-test for support vector machine has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
-    paired t-test for support vector machine result is 
+    paired t-test for support vector machine has the following result
+    test statistics = 39.691 
+    p value = 0.0
     
-    
-
-
-
-
-    Ttest_relResult(statistic=38.421378287507295, pvalue=9.844123162964297e-304)
-
-
 
 From above result, it is interesting to see that we failed reject null hypothesis (i.e. there is no difference between
 the predicted value and ground truth for multi-linear regression paired-t test) but reject the null hypothesis (that is, there IS a difference)
@@ -1202,111 +1184,12 @@ make sense when it comes to category. You can think it as using l2 loss (mean sq
 we'd better directly use accuracy score for model-model comparison.
 
 ## 6. Future Application <a name="future-app"></a>
-TODO:
+
 ## 7. Reference and External Link <a name="ref-and-extlink"></a>
 #### Gaming industry statistics
  - https://www.statista.com/statistics/292056/video-game-market-value-worldwide/
  - https://www.statista.com/statistics/552623/number-games-released-steam/
-#### Want to to know more about multiple linear regression?
- - https://www.scribbr.com/statistics/multiple-linear-regression/
- - https://en.wikipedia.org/wiki/Linear_regression
- - https://towardsdatascience.com/understanding-multiple-regression-249b16bde83e
 
-#### Extend materials for support vector machine, Knn, random forest
- - https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47
- - https://www.youtube.com/watch?v=1NxnPkZM9bc
- - https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761
- - https://scikit-learn.org/stable/modules/svm.html
- - https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
- - https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
-
-#### paired-t test reading:
- - https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/SAS/SAS4-OneSampleTtest/SAS4-OneSampleTtest7.html
-
-
-
-
-```python
-## 6. Future Application <a name="future-app"></a>
-TODO:
-## 7. Reference and External Link <a name="ref-and-extlink"></a>
-#### Want to to know more about multiple linear regression?
- - https://www.scribbr.com/statistics/multiple-linear-regression/
- - https://en.wikipedia.org/wiki/Linear_regression
- - https://towardsdatascience.com/understanding-multiple-regression-249b16bde83e
-
-#### Extend materials for support vector machine, Knn, random forest
- - https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47
- - https://www.youtube.com/watch?v=1NxnPkZM9bc
- - https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761
- - https://scikit-learn.org/stable/modules/svm.html
- - https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
- - https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
-
-#### paired-t test reading:
- - https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/SAS/SAS4-OneSampleTtest/SAS4-OneSampleTtest7.html
-```
-
-    paired t-test for random forest result is 
-    
-    
-
-
-
-
-    Ttest_relResult(statistic=9.064022064910278, pvalue=1.4630546520490245e-19)
-
-
-
-
-```python
-knn.fit(X,y_categorical)
-pred_y = knn.predict(X)
-print("paired t-test for k nearest neighbor result is \n")
-stats.ttest_rel(y_categorical, pred_y)
-```
-
-    paired t-test for k nearest neighbor result is 
-    
-    
-
-
-
-
-    Ttest_relResult(statistic=23.45994627419661, pvalue=6.88479830215365e-119)
-
-
-
-
-```python
-svm.fit(X,y_categorical)
-pred_y = svm.predict(X)
-print("paired t-test for support vector machine result is \n")
-stats.ttest_rel(y_categorical, pred_y)
-```
-
-    paired t-test for support vector machine result is 
-    
-    
-
-
-
-
-    Ttest_relResult(statistic=39.954277306310075, pvalue=0.0)
-
-
-
-From above result, it is interesting to see that we failed reject null hypothesis (i.e. there is no difference between
-the predicted value and ground truth for multi-linear regression paired-t test) but reject the null hypothesis (that is, there IS a difference)
-for the rest of three paired-t test. However, according to the accuracy score, random forest model achieved the highest. Why does this happen?
-
-According the formula that calculate t-value, we need to find the standard deviation of the difference between two groups. This standard deviation doesn't
-make sense when it comes to category. You can think it as using l2 loss (mean squared error) instead of cross-entropy loss for categorical problem. Therefore,
-we'd better directly use accuracy score for model-model comparison.
-
-## 6. Future Application <a name="future-app"></a>
-TODO:
-## 7. Reference and External Link <a name="ref-and-extlink"></a>
 #### Want to to know more about multiple linear regression?
  - https://www.scribbr.com/statistics/multiple-linear-regression/
  - https://en.wikipedia.org/wiki/Linear_regression
