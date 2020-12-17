@@ -796,53 +796,53 @@ df_for_training
   </thead>
   <tbody>
     <tr>
-      <th>4617</th>
-      <td>12</td>
+      <th>7195</th>
+      <td>2</td>
       <td>0</td>
-      <td>1546</td>
-      <td>0.023566</td>
-      <td>1997</td>
-      <td>0.014771</td>
+      <td>1627</td>
+      <td>0.008197</td>
+      <td>2005</td>
+      <td>0.006401</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>9879</th>
+      <th>8611</th>
       <td>11</td>
       <td>0</td>
-      <td>1313</td>
-      <td>0.005123</td>
-      <td>1996</td>
-      <td>0.001969</td>
+      <td>999</td>
+      <td>0.007172</td>
+      <td>2009</td>
+      <td>0.003939</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>3457</th>
-      <td>17</td>
-      <td>0</td>
-      <td>905</td>
-      <td>0.043033</td>
-      <td>1996</td>
-      <td>0.021664</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>475</th>
+      <th>8738</th>
       <td>2</td>
       <td>5</td>
-      <td>1772</td>
-      <td>0.090164</td>
-      <td>2003</td>
-      <td>0.108813</td>
-      <td>2</td>
+      <td>729</td>
+      <td>0.007172</td>
+      <td>1997</td>
+      <td>0.003939</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>3232</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1813</td>
-      <td>0.023566</td>
-      <td>2004</td>
-      <td>0.023634</td>
+      <th>6318</th>
+      <td>13</td>
+      <td>5</td>
+      <td>1535</td>
+      <td>0.007172</td>
+      <td>2002</td>
+      <td>0.008863</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10589</th>
+      <td>10</td>
+      <td>1</td>
+      <td>1489</td>
+      <td>0.003074</td>
+      <td>2008</td>
+      <td>0.000985</td>
       <td>1</td>
     </tr>
     <tr>
@@ -856,53 +856,53 @@ df_for_training
       <td>...</td>
     </tr>
     <tr>
-      <th>1642</th>
+      <th>689</th>
       <td>17</td>
       <td>0</td>
-      <td>505</td>
-      <td>0.044057</td>
-      <td>2013</td>
-      <td>0.044806</td>
-      <td>1</td>
+      <td>492</td>
+      <td>0.087090</td>
+      <td>2001</td>
+      <td>0.084687</td>
+      <td>2</td>
     </tr>
     <tr>
-      <th>6082</th>
-      <td>18</td>
-      <td>1</td>
-      <td>703</td>
-      <td>0.019467</td>
-      <td>2008</td>
-      <td>0.009355</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>7928</th>
-      <td>10</td>
-      <td>1</td>
-      <td>127</td>
-      <td>0.009221</td>
-      <td>2006</td>
-      <td>0.004924</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>6757</th>
-      <td>16</td>
-      <td>1</td>
-      <td>223</td>
-      <td>0.011270</td>
-      <td>2008</td>
-      <td>0.007386</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>10274</th>
+      <th>3353</th>
       <td>10</td>
       <td>5</td>
-      <td>477</td>
-      <td>0.004098</td>
-      <td>2002</td>
-      <td>0.001477</td>
+      <td>1813</td>
+      <td>0.014344</td>
+      <td>2007</td>
+      <td>0.022649</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3879</th>
+      <td>15</td>
+      <td>5</td>
+      <td>460</td>
+      <td>0.013320</td>
+      <td>2006</td>
+      <td>0.019202</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8249</th>
+      <td>2</td>
+      <td>5</td>
+      <td>1878</td>
+      <td>0.005123</td>
+      <td>2009</td>
+      <td>0.004431</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3749</th>
+      <td>12</td>
+      <td>0</td>
+      <td>329</td>
+      <td>0.020492</td>
+      <td>2003</td>
+      <td>0.020187</td>
       <td>1</td>
     </tr>
   </tbody>
@@ -1020,8 +1020,8 @@ print('The average score for linear regression is ',np.average(linear_score))
 print("The standard error of the score is ", np.std(linear_score))
 ```
 
-    The average score for linear regression is  0.8389972878343632
-    The standard error of the score is  0.02656213559835733
+    The average score for linear regression is  0.8367418408832545
+    The standard error of the score is  0.047547289150065765
     
 
 
@@ -1039,12 +1039,12 @@ print("The average score for SVM is ", np.average(svm_score))
 print("The standard error of the score is ", np.std(svm_score))
 ```
 
-    The average score for Random Forest is  0.9455400943212984
-    The standard error of the score is  0.005250425986782506
-    The average score for kNN is  0.8735466828271526
-    The standard error of the score is  0.007593598713356333
-    The average score for SVM is  0.8983963048427072
-    The standard error of the score is  0.01175409018656301
+    The average score for Random Forest is  0.9439547351001096
+    The standard error of the score is  0.004910405559656223
+    The average score for kNN is  0.8736344000808025
+    The standard error of the score is  0.007545701430274152
+    The average score for SVM is  0.8927563729032159
+    The standard error of the score is  0.016480349907004876
     
 
 ### Result Anlysis and Demonstration <a name="result-and-demon"></a>
@@ -1097,7 +1097,7 @@ stats.ttest_rel(y_categorical, pred_y)
 
 
 
-    Ttest_relResult(statistic=1.2374634887003975e-13, pvalue=0.9999999999999013)
+    Ttest_relResult(statistic=4.4074315837987435e-15, pvalue=0.9999999999999964)
 
 
 
@@ -1109,6 +1109,17 @@ print("paired t-test for random forest result is \n")
 stats.ttest_rel(y_categorical, pred_y)
 ```
 
+    paired t-test for random forest result is 
+    
+    
+
+
+
+
+    Ttest_relResult(statistic=7.850346071632364, pvalue=4.521802710394617e-15)
+
+
+
 
 ```python
 knn.fit(X,y_categorical)
@@ -1117,6 +1128,17 @@ print("paired t-test for k nearest neighbor result is \n")
 stats.ttest_rel(y_categorical, pred_y)
 ```
 
+    paired t-test for k nearest neighbor result is 
+    
+    
+
+
+
+
+    Ttest_relResult(statistic=22.891796775482938, pvalue=2.0325341851847787e-113)
+
+
+
 
 ```python
 svm.fit(X,y_categorical)
@@ -1124,6 +1146,17 @@ pred_y = svm.predict(X)
 print("paired t-test for support vector machine result is \n")
 stats.ttest_rel(y_categorical, pred_y)
 ```
+
+    paired t-test for support vector machine result is 
+    
+    
+
+
+
+
+    Ttest_relResult(statistic=38.421378287507295, pvalue=9.844123162964297e-304)
+
+
 
 From above result, it is interesting to see that we failed reject null hypothesis (i.e. there is no difference between
 the predicted value and ground truth for multi-linear regression paired-t test) but reject the null hypothesis (that is, there IS a difference)
