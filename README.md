@@ -1,4 +1,3 @@
-#### Siyuan "Kevin" Peng, Yuanzhe "Siris" Zheng, Yanlin "Jacky" Liu
 ![Image of Yaktocat](https://cdn.mos.cms.futurecdn.net/rLh7Dh7EKo8F6zmDtXYp8W.jpg)
 # Table of Contents
 1. [Introduction](#introduction)
@@ -15,9 +14,12 @@
 7. [Reference and External Link](#ref-and-extlink)
 
 ## 1. Introduction <a name="introduction"></a>
-(***We need a better opening***) Video game is one of the most exciting fields related to Computer Science,
-the earliest video games were developed in the 1950s, which had very premitive features. With the development of
-hardware and graphic technology, now video games can have lifelike graphics, fancy visual effects, thrilling action systems
+Have you dreamed about strolling around a dystopian metropole where violence, oppression, and cyberware implants aren't just common in 2077?
+Have you dreamed about holding a Great Sword fight against a giant ancient dragon in Monster World?
+Have you dreamed about driving Bugatti Veyron Super Sport in the city and all your opponents are in your rear mirror?
+Playing video games seems to be a more and more popular entertainment options for people, especially in the middle of pandemic.
+Gaming market values are almost double from 2012 to 2020. It's now a 150 billion industry with almost 10 thousands of game produced each year.
+In this project, we are interested in what makes a game popular and how much revenue it may generate. 
 
 ## 2. Install Packages <a name="install-pkg"></a>
 ```
@@ -46,7 +48,7 @@ is a complementary dataset we will use to fill in  important missing values like
 **Datasets**
 "vgsales-12-4-2019.csv" is a kaggle dataset with around 50000 records of game sales collected in 2019.
 There are missing values in the column "Global_Sales", since this column is the predicted value for our model training,
-we load another dataset "video_games.csv" to fill in these values as many as possbile and drop the rest N/A values.
+we load another dataset "video_games.csv" to fill in these values as many as possible and drop the rest N/A values.
 
 "video_games.csv" is a dataset of Steam game sales,
  we load it from [Github](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-30).
@@ -1202,6 +1204,9 @@ we'd better directly use accuracy score for model-model comparison.
 ## 6. Future Application <a name="future-app"></a>
 TODO:
 ## 7. Reference and External Link <a name="ref-and-extlink"></a>
+#### Gaming industry statistics
+ - https://www.statista.com/statistics/292056/video-game-market-value-worldwide/
+ - https://www.statista.com/statistics/552623/number-games-released-steam/
 #### Want to to know more about multiple linear regression?
  - https://www.scribbr.com/statistics/multiple-linear-regression/
  - https://en.wikipedia.org/wiki/Linear_regression
