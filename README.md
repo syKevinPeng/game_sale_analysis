@@ -48,6 +48,7 @@ import numpy as np
 import sklearn
 from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from sklearn.compose import ColumnTransformer
+from sklearn import preprocessing
 import locale
 
 locale.setlocale( locale.LC_ALL, 'en_US.UTF-8' ) 
@@ -163,19 +164,24 @@ additional.head()
 
 
 ```python
-additional = additional.dropna(subset = ['owners'])
+additional = additional.dropna(subset = ['owners', 'release_date'])
 additional = additional.reset_index(drop = True)
 additional['Critic_Score'] = additional['metascore']/10
+additional['Year'] = additional['release_date']
+additional['owners'] = additional['owners'].astype(str)
 for i in range(len(additional)):
     str(additional.loc[i, 'owners'])
     nums = additional.loc[i, 'owners'].split('\xa0..\xa0')
 #     print(nums)
     additional.loc[i, 'owners'] = float((locale.atoi(nums[1]) - locale.atoi(nums[0])) / 2000000)
 #     print(additional.loc[i, 'owners'])
-```
-
-
-```python
+    temp = additional.loc[i, 'Year'].split(', ')
+    if len(temp) != 2:
+        additional.loc[i, 'Year'] = np.nan
+    else:
+        additional.loc[i, 'Year'] = int(temp[1])
+#     print(additional.loc[i, 'Year'].split(', ')[1])
+additional = additional.dropna(subset = ['release_date'])
 additional = additional.drop(columns = ['number', 'price', 'average_playtime', 'median_playtime'])
 additional.head()
 ```
@@ -208,6 +214,7 @@ additional.head()
       <th>publisher</th>
       <th>metascore</th>
       <th>Critic_Score</th>
+      <th>Year</th>
     </tr>
   </thead>
   <tbody>
@@ -220,6 +227,7 @@ additional.head()
       <td>Valve</td>
       <td>96.0</td>
       <td>9.6</td>
+      <td>2004</td>
     </tr>
     <tr>
       <th>1</th>
@@ -230,6 +238,7 @@ additional.head()
       <td>Valve</td>
       <td>88.0</td>
       <td>8.8</td>
+      <td>2004</td>
     </tr>
     <tr>
       <th>2</th>
@@ -240,6 +249,7 @@ additional.head()
       <td>Valve</td>
       <td>65.0</td>
       <td>6.5</td>
+      <td>2004</td>
     </tr>
     <tr>
       <th>3</th>
@@ -250,6 +260,7 @@ additional.head()
       <td>Valve</td>
       <td>NaN</td>
       <td>NaN</td>
+      <td>2004</td>
     </tr>
     <tr>
       <th>4</th>
@@ -260,6 +271,7 @@ additional.head()
       <td>Valve</td>
       <td>NaN</td>
       <td>NaN</td>
+      <td>2004</td>
     </tr>
   </tbody>
 </table>
@@ -272,10 +284,13 @@ additional.head()
 additional['Name'] = additional['game']
 additional['Developer'] = additional['developer']
 additional['Global_Sales'] = additional['owners']
+df = df.dropna(subset = ['Year'])
+df['Year'] = df['Year'].astype(int)
+
 additional = additional.drop(columns=['metascore', 'release_date', 'publisher', 'game', 'developer', 'owners'])
 df = df.drop(columns=['Rank', 'basename', 'Total_Shipped', 'Platform', 'Publisher', 'VGChartz_Score', 
-                      'Last_Update', 'url', 'status', 'Vgchartzscore', 'img_url', 'ESRB_Rating', 'Year'])
-pd.merge(df, additional, on = ['Name', 'Developer'] , how = 'outer')
+                      'Last_Update', 'url', 'status', 'Vgchartzscore', 'img_url',  'User_Score'])
+pd.merge(df, additional, on = ['Name', 'Year'] , how = 'left')
 df.head()
 ```
 
@@ -302,14 +317,15 @@ df.head()
       <th></th>
       <th>Name</th>
       <th>Genre</th>
+      <th>ESRB_Rating</th>
       <th>Developer</th>
       <th>Critic_Score</th>
-      <th>User_Score</th>
       <th>Global_Sales</th>
       <th>NA_Sales</th>
       <th>PAL_Sales</th>
       <th>JP_Sales</th>
       <th>Other_Sales</th>
+      <th>Year</th>
     </tr>
   </thead>
   <tbody>
@@ -317,6 +333,7 @@ df.head()
       <th>0</th>
       <td>Wii Sports</td>
       <td>Sports</td>
+      <td>E</td>
       <td>Nintendo EAD</td>
       <td>7.7</td>
       <td>NaN</td>
@@ -324,12 +341,13 @@ df.head()
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>NaN</td>
+      <td>2006</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Super Mario Bros.</td>
       <td>Platform</td>
+      <td>NaN</td>
       <td>Nintendo EAD</td>
       <td>10.0</td>
       <td>NaN</td>
@@ -337,25 +355,27 @@ df.head()
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>NaN</td>
+      <td>1985</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Mario Kart Wii</td>
       <td>Racing</td>
+      <td>E</td>
       <td>Nintendo EAD</td>
       <td>8.2</td>
-      <td>9.1</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
+      <td>2008</td>
     </tr>
     <tr>
       <th>3</th>
       <td>PlayerUnknown's Battlegrounds</td>
       <td>Shooter</td>
+      <td>NaN</td>
       <td>PUBG Corporation</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -363,20 +383,21 @@ df.head()
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
-      <td>NaN</td>
+      <td>2017</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Wii Sports Resort</td>
       <td>Sports</td>
+      <td>E</td>
       <td>Nintendo EAD</td>
       <td>8.0</td>
-      <td>8.8</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
+      <td>2009</td>
     </tr>
   </tbody>
 </table>
@@ -388,27 +409,60 @@ df.head()
 ```python
 df = df.dropna(subset=['Developer', 'Genre'])
 df = df.reset_index(drop = True)
+df['Sales_Ranking'] = df['Global_Sales']
 for i in range(len(df)):
     df.loc[i, 'Developer'] = str(df.loc[i, 'Developer'])
+    if df.loc[i, 'Sales_Ranking'] >= 10:
+        df.loc[i, 'Sales_Ranking'] = 4
+    elif df.loc[i, 'Sales_Ranking'] >= 5 and df.loc[i, 'Sales_Ranking'] < 10:
+        df.loc[i, 'Sales_Ranking'] = 3
+    elif df.loc[i, 'Sales_Ranking'] >= 1 and df.loc[i, 'Sales_Ranking'] < 5:
+        df.loc[i, 'Sales_Ranking'] = 2
+    else:
+        df.loc[i, 'Sales_Ranking'] = 1
 le = LabelEncoder()
-ohe = OneHotEncoder(handle_unknown = 'ignore')
-df['Developer'] = le.fit_transform(df['Developer'])
+# ohe = OneHotEncoder(handle_unknown = 'ignore')
+df['Sales_Ranking'] = df['Sales_Ranking'].astype(int)
+# df['Developer'] = le.fit_transform(df['Developer'])
 df['Genre'] = le.fit_transform(df['Genre'])
-df_temp = pd.DataFrame(ohe.fit_transform(df[['Genre']]).toarray())
+df = df.dropna(subset=['Global_Sales', 'ESRB_Rating'])
+df['ESRB_Rating'] = le.fit_transform(df['ESRB_Rating'])
+# df_temp = pd.DataFrame(ohe.fit_transform(df[['Genre']]).toarray())
 ```
 
 
 ```python
-df = df.join(df_temp)
-df = df.drop(columns = ['Genre', 'User_Score'])
-df = df.dropna(subset=['Global_Sales'])
+
+# df = df.join(df_temp)
+
 df = df.reset_index(drop = True)
 df = df[df['Global_Sales'] != 0.0]
+df_for_visualization = df
 ```
 
 
 ```python
-df
+df_for_training = df
+df_for_training = df.drop(columns = ['Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'])
+df_for_training = df_for_training.dropna(subset = ['NA_Sales'])
+temp_df = df_for_training.drop(columns=['Genre', 'ESRB_Rating', 'Developer', 'Year', 'Sales_Ranking'])
+
+x = temp_df.values
+min_max_scaler = preprocessing.MinMaxScaler()
+x_scaled = min_max_scaler.fit_transform(x)
+temp_df = pd.DataFrame(x_scaled)
+```
+
+
+```python
+df_for_training['Global_Sales'] = temp_df[0]
+df_for_training['NA_Sales'] = temp_df[1]
+df_for_training = df_for_training.dropna(subset = ['Global_Sales', 'NA_Sales'])
+df_for_training = df_for_training.reset_index(drop = True)
+df_for_training['Developer'] = le.fit_transform(df_for_training['Developer'])
+# Shuffle and reorder the dataframe
+df_for_training = df_for_training.sample(frac=1)[['Genre','ESRB_Rating','Developer','NA_Sales','Year','Global_Sales','Sales_Ranking']]
+df_for_training
 ```
 
 
@@ -432,149 +486,65 @@ df
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Name</th>
+      <th>Genre</th>
+      <th>ESRB_Rating</th>
       <th>Developer</th>
-      <th>Critic_Score</th>
-      <th>Global_Sales</th>
       <th>NA_Sales</th>
-      <th>PAL_Sales</th>
-      <th>JP_Sales</th>
-      <th>Other_Sales</th>
-      <th>0</th>
-      <th>1</th>
-      <th>...</th>
-      <th>10</th>
-      <th>11</th>
-      <th>12</th>
-      <th>13</th>
-      <th>14</th>
-      <th>15</th>
-      <th>16</th>
-      <th>17</th>
-      <th>18</th>
-      <th>19</th>
+      <th>Year</th>
+      <th>Global_Sales</th>
+      <th>Sales_Ranking</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>Grand Theft Auto V</td>
-      <td>5783</td>
-      <td>9.4</td>
-      <td>20.32</td>
-      <td>6.37</td>
-      <td>9.85</td>
-      <td>0.99</td>
-      <td>3.12</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>9592</th>
+      <td>12</td>
+      <td>5</td>
+      <td>1355</td>
+      <td>0.005123</td>
+      <td>2002</td>
+      <td>0.002954</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>Grand Theft Auto V</td>
-      <td>5783</td>
-      <td>9.7</td>
-      <td>19.39</td>
-      <td>6.06</td>
-      <td>9.71</td>
-      <td>0.60</td>
-      <td>3.02</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>1533</th>
+      <td>15</td>
+      <td>5</td>
+      <td>1570</td>
+      <td>0.047131</td>
+      <td>2006</td>
+      <td>0.047267</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>Grand Theft Auto: Vice City</td>
-      <td>5783</td>
-      <td>9.6</td>
-      <td>16.15</td>
-      <td>8.41</td>
-      <td>5.49</td>
-      <td>0.47</td>
-      <td>1.78</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>2003</th>
+      <td>0</td>
+      <td>3</td>
+      <td>788</td>
+      <td>0.024590</td>
+      <td>2017</td>
+      <td>0.037912</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>Grand Theft Auto V</td>
-      <td>5783</td>
-      <td>NaN</td>
-      <td>15.86</td>
-      <td>9.06</td>
-      <td>5.33</td>
-      <td>0.06</td>
-      <td>1.42</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>2400</th>
+      <td>13</td>
+      <td>5</td>
+      <td>926</td>
+      <td>0.017418</td>
+      <td>2005</td>
+      <td>0.032004</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>Call of Duty: Black Ops 3</td>
-      <td>7108</td>
-      <td>NaN</td>
-      <td>15.09</td>
-      <td>6.18</td>
-      <td>6.05</td>
-      <td>0.41</td>
-      <td>2.44</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>8433</th>
+      <td>16</td>
+      <td>0</td>
+      <td>1763</td>
+      <td>0.010246</td>
+      <td>2009</td>
+      <td>0.004924</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>...</th>
@@ -585,165 +555,67 @@ df
       <td>...</td>
       <td>...</td>
       <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
     </tr>
     <tr>
-      <th>18028</th>
-      <td>FirePower for Microsoft Combat Flight Simulator 3</td>
-      <td>6118</td>
-      <td>NaN</td>
-      <td>0.01</td>
-      <td>NaN</td>
-      <td>0.00</td>
-      <td>NaN</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>2032</th>
+      <td>17</td>
+      <td>0</td>
+      <td>57</td>
+      <td>0.038934</td>
+      <td>2002</td>
+      <td>0.037420</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>18029</th>
-      <td>Tom Clancy's Splinter Cell</td>
-      <td>7205</td>
-      <td>NaN</td>
-      <td>0.01</td>
-      <td>NaN</td>
-      <td>0.00</td>
-      <td>NaN</td>
-      <td>0.00</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>10905</th>
+      <td>10</td>
+      <td>0</td>
+      <td>126</td>
+      <td>0.003074</td>
+      <td>2004</td>
+      <td>0.001477</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>18030</th>
-      <td>Ashita no Joe 2: The Anime Super Remix</td>
-      <td>1225</td>
-      <td>NaN</td>
-      <td>0.01</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.01</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>1121</th>
+      <td>17</td>
+      <td>0</td>
+      <td>492</td>
+      <td>0.013320</td>
+      <td>2012</td>
+      <td>0.061054</td>
+      <td>2</td>
     </tr>
     <tr>
-      <th>18031</th>
-      <td>Tokyo Yamanote Boys for V: Main Disc</td>
-      <td>5684</td>
-      <td>NaN</td>
-      <td>0.01</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.01</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>6280</th>
+      <td>1</td>
+      <td>1</td>
+      <td>181</td>
+      <td>0.011270</td>
+      <td>2015</td>
+      <td>0.009355</td>
+      <td>1</td>
     </tr>
     <tr>
-      <th>18032</th>
-      <td>NadePro!! Kisama no Seiyuu Yatte Miro!</td>
-      <td>2932</td>
-      <td>NaN</td>
-      <td>0.01</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>0.01</td>
-      <td>NaN</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>7248</th>
+      <td>10</td>
+      <td>0</td>
+      <td>89</td>
+      <td>0.014344</td>
+      <td>2009</td>
+      <td>0.006893</td>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
-<p>18033 rows × 28 columns</p>
+<p>11348 rows × 7 columns</p>
 </div>
 
 
 
 
 ```python
-df.shape
-```
-
-
-
-
-    (12962, 30)
-
-
-
 ### 4.b Data Analysis and Visualization' <a name="data-ana-vis"></a>
-
-
-```python
-#TODO:
 ```
 
 ## 5. Machine Learning Model <a name="ml-model"></a>
@@ -795,6 +667,7 @@ We will use sklearn library for most of our training task. Non-linear regression
 
 ```python
 from sklearn import linear_model, model_selection
+from sklearn.ensemble import RandomForestClassifier
 from scipy.optimize import curve_fit
 import sklearn
 
@@ -812,9 +685,9 @@ all processors to participate the computation given that we have relatively larg
 
 ```python
 # build model for categorical predictors
-random_forest = sklearn.ensemble.RandomForestClassifier(n_estimators = 1000, random_state=42,max_depth=4,n_jobs = -1)
+random_forest = RandomForestClassifier(n_estimators = 1000, random_state=42,max_depth=4,n_jobs = -1)
 knn = sklearn.neighbors.KNeighborsClassifier(n_neighbors=5)
-svm = sklearn.svm.LinearSVC()
+svm = sklearn.svm.LinearSVC(max_iter=2000,dual=False)
 ```
 
 Explanation:
@@ -830,7 +703,37 @@ unstable decision boundaries will too large will make the decision boundaries un
 
 SVM is little bit intriguing. There are two options for us to set the "decision_function_shape". One is "ovo", which stands for one-verses-one, and the other option is called one-vs-the-rest.
 One-verse-one compare each classcifier with the predict value one by one while the one verse the rest option treats the x as a group and compare it with the y. In our case, we consider all the regressor
-as a group.
+as a group. The reason why we set max_iter to 2000 is that it will not converge at default number of iterations
+
+
+```python
+# Assign first several columns as X and last two columns as ground truth
+X = df_for_training.iloc[:, 0:5]
+y_categorical = df_for_training[['Sales_Ranking']].to_numpy().flatten()
+y_numerical = df_for_training[['Global_Sales']].to_numpy().flatten()
+```
+
+
+```python
+# Implement 10-fold cross validation
+rfr_score = model_selection.cross_val_score(random_forest, X, y_categorical, cv = 10)
+print("The average score for Random Forest is ", np.average(rfr_score))
+print("The standard error of the score is ", np.std(rfr_score))
+knn_score = model_selection.cross_val_score(knn, X, y_categorical, cv = 10)
+print("The average score for kNN is ", np.average(knn_score))
+print("The standard error of the score is ", np.std(knn_score))
+svm_score = model_selection.cross_val_score(svm,X, y_categorical, cv = 10)
+print("The average score for SVM is ", np.average(svm_score))
+print("The standard error of the score is ", np.std(svm_score))
+```
+
+    The average score for Random Forest is  0.9455400943212984
+    The standard error of the score is  0.005250425986782506
+    The average score for kNN is  0.8735466828271526
+    The standard error of the score is  0.007593598713356333
+    The average score for SVM is  0.8983963048427072
+    The standard error of the score is  0.01175409018656301
+    
 
 ### Result Anlysis and Demonstration <a name="result-ana-demon"></a>
 TODO:
@@ -842,6 +745,12 @@ TODO:
  - https://en.wikipedia.org/wiki/Linear_regression
  - https://towardsdatascience.com/understanding-multiple-regression-249b16bde83e
 
-#### Extend materials for support vector machine
+#### Extend materials for support vector machine, Knn, random forest
  - https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47
  - https://www.youtube.com/watch?v=1NxnPkZM9bc
+ - https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761
+ - https://scikit-learn.org/stable/modules/svm.html
+ - https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
+ - https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
+
+###
