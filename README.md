@@ -15,9 +15,9 @@
 7. [Reference and External Link](#ref-and-extlink)
 
 ## 1. Introduction <a name="introduction"></a>
-(***We need a better opening***) Video game is one of the most exciting fields related to Computer Science, 
-the earliest video games were developed in the 1950s, which had very premitive features. With the development of 
-hardware and graphic technology, now video games can have lifelike graphics, fancy visual effects, thrilling action systems 
+(***We need a better opening***) Video game is one of the most exciting fields related to Computer Science,
+the earliest video games were developed in the 1950s, which had very premitive features. With the development of
+hardware and graphic technology, now video games can have lifelike graphics, fancy visual effects, thrilling action systems
 
 ## 2. Install Packages <a name="install-pkg"></a>
 ```
@@ -41,22 +41,21 @@ import kaggle
 
 or directly download from kaggle webpage: [https://www.kaggle.com/ashaheedq/video-games-sales-2019](https://www.kaggle.com/ashaheedq/video-games-sales-2019)_
 ## 4. Preprocessing <a name="preprocessing"></a>
-In this section, we will load and process the two datasets: "vgsales-12-4-2019.csv" is our main dataset and "video_games.csv" 
+In this section, we will load and process the two datasets: "vgsales-12-4-2019.csv" is our main dataset and "video_games.csv"
 is a complementary dataset we will use to fill in  important missing values like "Global_Sales" and "Critic_Score" in the first dataset.
 **Datasets**
-"vgsales-12-4-2019.csv" is a dataset with 55,792 records of game sales collected by 2019, it is loaded from Kaggle. 
-There are missing values in the column "Global_Sales", since this column is important in our analysis, 
-we load another dataset "video_games.csv" to fill in these values as many as possbile.
+"vgsales-12-4-2019.csv" is a kaggle dataset with around 50000 records of game sales collected in 2019.
+There are missing values in the column "Global_Sales", since this column is the predicted value for our model training,
+we load another dataset "video_games.csv" to fill in these values as many as possbile and drop the rest N/A values.
 
 "video_games.csv" is a dataset of Steam game sales,
- we load it from [Github](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-30). 
- It has a cloumn "owners" which includes a range of the number of players that own the game, 
- we take the median of this range as the value to replace NaN in the column "Global_Sales", 
- and we will do the same for the missing values in "Critic_Score". To merge the two datasets after doing necessary 
- processing, we will use a LEFT JOIN on the columns "Name" and "Year".
+ we load it from [Github](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-30).
+ It has a cloumn "owners" which includes a range of the number of players that own each game,
+ we take the expected value (or median) of every range as the replacement for the missing data in the first dataset,
+ and we will do the same for the missing values in "Critic_Score". To merge the two datasets after doing necessary
+ processing, we will use a LEFT JOIN based on the columns "Name" and "Year".
 ### 4.a. Load and Clean Data <a name="load-and-clean"></a>
-In the following cells we import the libraries we will use for data preprocessing, 
-then we load the datasets using pandas.read_csv() function and create a preview of the datasets using df.head() function.
+In the following cells we import the libraries,load the datasets using pandas.read_csv() function, and reate a preview of the datasets using df.head() function.
 
 
 ```python
@@ -357,14 +356,14 @@ additional.head()
 
 
 **Clean the additional dataset**
-Now we process the additional dataset. First, we drop rows with NaN values in the columns "owners" and "release_date" 
-because we do not want to have missing values in these columns, and reset the index of the dataframe. Next, we divide 
-the values in the column "metascore" by 10 to make the unit (a float with one decimal place) match in both tables, and 
-store the results in a new column "Critic_Score". To calculate the median of the range of owners, we convert the values 
-in the column "owners" to string, then iterate through the dataframe to split the string and convert the results to integers, 
+Let's process the additional dataset. First, we drop rows with NaN values in the columns "owners" and "release_date"
+because we do not want to have missing values in these columns, and reset the index of the dataframe. Next, we divide
+the values in the column "metascore" by 10 to make the unit (a float with one decimal place) match in both tables, and
+store the results in a new column "Critic_Score". To calculate the median of the range of owners, we convert the values
+in the column "owners" to string, then iterate through the dataframe to split the string and convert the results to integers,
 finally we calculate the result (in millions). In the same loop, we also extract the value of year from the column "release_date".
- Note that there are NaN values in the column "Critic_Score" but we do not drop them because our main goal is to get more values 
- for "Global_Sales". After renaming the columns that we will use to merge the datasets 
+ Note that there are NaN values in the column "Critic_Score" but we do not drop them because our main goal is to get more values
+ for "Global_Sales". After renaming the columns that we will use to merge the datasets
  (by copying to new columns and dropping the original columns), we finish processing the additional dataset.
 
 
@@ -471,10 +470,10 @@ additional.head()
 
 
 **Merge the main dataset and the additional dataset**
-Before merging the two datasets, we drop rows having missing values in the column "Year" as we will use this column 
-and the column "Name" in merging. Then we drop columns we will not use in data visualization and data analysis, which 
-are 'Rank', 'basename', 'Total_Shipped', 'Platform', 'Publisher', 'VGChartz_Score', 'Last_Update', 'url', 'status', 
-'Vgchartzscore', 'img_url', 'User_Score'. 
+Before merging the two datasets, we drop rows having missing values in the column "Year" as we will use this column
+and the column "Name" in merging. Then we drop columns we will not use in data visualization and data analysis, which
+are 'Rank', 'basename', 'Total_Shipped', 'Platform', 'Publisher', 'VGChartz_Score', 'Last_Update', 'url', 'status',
+'Vgchartzscore', 'img_url', 'User_Score'.
 
 The type of join we choose is left join, because we do not want to add excessive records from the additional dataset.
 
@@ -601,14 +600,17 @@ df.head()
 
 
 **Process the merged dataset**
-First we drop rows with missing values in the columns "Developer" and "Genre", and reset the index. We create a new 
-column "Sales_Ranking" referring to a new category, when a game has over 10 million sales, its Sales_Ranking is 4, 
-a game with 5-10 million sales has a Sales_Ranking of 3, a game with 1-5 million sales has a Sales_Ranking of 2, 
-a game with sales lower than 1 million will have Sales_Ranking of 1.
+First we drop rows with missing values in the columns "Developer" and "Genre", and reset the index.
+It is obvious to predict sales as numerical data but we have the accuracy concern(we will see accuracy in the **Result Analysis and Demonstration** section)
+since the data may not demonstrate a strong linear trend. Therefore, we hope to predict it as categorical data: sale score is divided into 4 categories.
+Games in ">10" category are expected to sell so greate that its name will left in history -- Grand Theft Auto, Pokemon, Call of duty and etc. You name it.
+Games in "5-10" category are sold less than the top ones, but they are still great games. "5-1" games are good games. there are still large amount of customer want to
+put them into their gaming library. The rest of games can be put into "1-0" categories. We respect the efforts that game developers put into them but they are relatively
+niche.
 
-For data analysis, we need to convert categorical variable to numerical variable. We choose to use label encoding on 
-the three categories, "Genre", "ESRB_Rating" and "Developer" because it is easier to process numerical values in data 
-analysis than processing string values. Since the total number of developers is large and we will use "Genre" 
+For data analysis, we need to convert categorical variable to numerical variable. We choose to use label encoding on
+the three categories, "Genre", "ESRB_Rating" and "Developer" because it is easier to process numerical values in data
+analysis than processing string values. Since the total number of developers is large and we will use "Genre"
 in data visualization, we will process "Developer" and "Genre" later. To create the dataframe for data analysis,
  we need to drop columns that we will not use, which are 'Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'.
   Also, we will normalize the numerical values in the columns "Global_Sales" and "NA_Sales" by using the sklearn.preprocessing module.
@@ -640,7 +642,7 @@ df['ESRB_Rating'] = le.fit_transform(df['ESRB_Rating'])
 ```
 
 **Dataframe for data visualization**
-Now we create the dataframe for data visualization. We drop rows with NaN values in the columns "Global_Sales" 
+Now we create the dataframe for data visualization. We drop rows with NaN values in the columns "Global_Sales"
 and "NA_Sales" because these missing values can not be used in plotting the graphs.
 
 
@@ -770,8 +772,8 @@ df_for_visualization.head()
 
 
 **Dataframe for data analysis**
-To create the dataframe for data analysis, we need to drop columns that we will not use, 
-which are 'Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'. Also, we will normalize 
+To create the dataframe for data analysis, we need to drop columns that we will not use,
+which are 'Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'. Also, we will normalize
 the numerical values in the columns "Global_Sales" and "NA_Sales" by using the sklearn.preprocessing module.
 
 
@@ -955,12 +957,6 @@ In this section, we are going to implement several models and predict global sal
 can split datas into two groups: numerical data and categorical data. Numerical data is everything that represented by numbers (integer
 and floating point). It's continuous. Categorical data, however, is discrete. Different models will be used to predict these two type of data.
 
-It is obvious to predict sales as numerical data but we have the accuracy concern(we will see accuracy in the **Result Analysis and Demonstration** section)
-since the data may not demonstrate a strong linear trend. Therefore, we hope to predict it as categorical data: sale score is divided into 4 categories.
-Games in ">10" category are expected to sell so greate that its name will left in history -- Grand Theft Auto, Pokemon, Call of duty and etc. You name it.
-Games in "5-10" category are sold less than the top ones, but they are still great games. "5-1" games are good games. there are still large amount of customer want to
-put them into their gaming library. The rest of games can be put into "1-0" categories. We respect the efforts that game developers put into them but they are relatively
-niche.
 ### 5.a What and Why <a name="what-why"></a>
 
 We want to use *multiple linear regression* for predicting numerical sale number. The reason is that we intend to investigate
