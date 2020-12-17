@@ -10,7 +10,7 @@
 5. [Machine Learning Model](#ml-model)<br>
     a. [What and Why](#what-why)<br>
     b. [Training](#training)<br>
-    c. [Result Anlysis and Demonstration](#result-ana-demon)
+    c. [Result Anlysis and Demonstration](#result-and-demon)
 6. [Future Application](#future-app)
 7. [Reference and External Link](#ref-and-extlink)
 
@@ -638,10 +638,6 @@ one dependent variable -- sale score. We made several assumptions for using mult
  - Independence of Observations: each game is independent of others.
  - Linearity: the line of best fit through the data point is a straight line.
 
-However, one potential issue is that there is no way we can check the linearity due to the fact that we have
-multiple categories. Therefore, we also hope to perform *multiple nonlinear regression*, i.e. we will fit a curve
-instead of a line for the data.
-
 Several models will be used for the prediction of categorical sale number: *Random forest*, *k-nearest neighbors* (KNN) and
 *Support vector machine*(SVM)
 
@@ -668,19 +664,15 @@ We will use sklearn library for most of our training task. Non-linear regression
 ```python
 from sklearn import linear_model, model_selection
 from sklearn.ensemble import RandomForestClassifier
-from scipy.optimize import curve_fit
 import sklearn
 
 # build model for numerical predictors
-muti_linear_regression = linear_model.LinearRegression(normalize=False,n_jobs=-1)
-muti_linear_regression_normalized = linear_model.LinearRegression(normalize=True,n_jobs=-1)
+muti_linear_regression = linear_model.LinearRegression(n_jobs=-1)
 ```
 
 Explanation:
 
-As for multiple linear regression, we have two models. One is non-modified x value and the other one is normalized x. Typically, we want to let each regressor have
-equal impact on the prediction so normalized is needed. Let's check the validation accuracy to see if it fits the hypothesis. The parameter "n_jobs = -1" means we want
-all processors to participate the computation given that we have relatively large dataset and many regressors.
+This is a very simple and straight-forward model with n_jobs = -1, which means we want to use all available CPU cores for efficiency purpose
 
 
 ```python
@@ -715,6 +707,27 @@ y_numerical = df_for_training[['Global_Sales']].to_numpy().flatten()
 
 
 ```python
+# numerical model
+# 10-fold cross validation for multi-linear regression:
+linear_score = []
+X = X.to_numpy()
+for train_index, test_index in model_selection.KFold(n_splits=10).split(X):
+    X_train, X_test = X[train_index], X[test_index]
+    y_train, y_test = y_numerical[train_index], y_numerical[test_index]
+    model = muti_linear_regression.fit(X_train,y_train)
+    score = model.score(X_test,y_test)
+    linear_score.append(score)
+print('The average score for linear regression is ',np.average(linear_score))
+print("The standard error of the score is ", np.std(linear_score))
+```
+
+    The average score for linear regression is  0.8389972878343632
+    The standard error of the score is  0.02656213559835733
+    
+
+
+```python
+# categorical model
 # Implement 10-fold cross validation
 rfr_score = model_selection.cross_val_score(random_forest, X, y_categorical, cv = 10)
 print("The average score for Random Forest is ", np.average(rfr_score))
@@ -735,8 +748,125 @@ print("The standard error of the score is ", np.std(svm_score))
     The standard error of the score is  0.01175409018656301
     
 
-### Result Anlysis and Demonstration <a name="result-ana-demon"></a>
-TODO:
+### Result Anlysis and Demonstration <a name="result-and-demon"></a>
+Below is the bar graph of accuracy score for different models
+
+
+```python
+import matplotlib.pyplot as plt
+models = ['linear_reg', 'radom forest', 'knn', 'svm']
+scores = [linear_score,rfr_score, knn_score,svm_score]
+accuracy = np.average(scores,axis=1)
+std = np.std(scores,axis=1)
+fig, ax = plt.subplots()
+ax.bar(models,accuracy,align = 'center',yerr = std, capsize=20)
+ax.set_xticks(models)
+ax.set_title('Accuracy of Four Models For Game Sale Prediction')
+ax.yaxis.grid(True)
+ax.set_xlabel("Model")
+ax.set_ylabel('Accuracy Score')
+plt.show()
+```
+
+
+    
+![png](README_files/README_24_0.png)
+    
+
+
+Random forest model has the best accuracy score and I think bagging and bootstrap could be the reason why it outperformed other models.
+Also, the prediction for categorical variable generally better than the numerical prediction becuase, intuitively, predicting a category is
+easier than a specific number.
+
+Since we are interested in the difference between two variables for the same subject, we are going to perform paired-t test for the predicted value and the ground truth to see
+the statistical difference between them. Our null hypothesis would be the average difference between the predicted value and ground truth is 0 and alternative hypothesis is the
+average difference is not 0. We choose alpha value = 0.05
+
+
+```python
+from scipy import stats
+muti_linear_regression.fit(X,y_categorical)
+pred_y = muti_linear_regression.predict(X)
+print("paired t-test for random multi-linear regression is \n")
+stats.ttest_rel(y_categorical, pred_y)
+```
+
+    paired t-test for random multi-linear regression is 
+    
+    
+
+
+
+
+    Ttest_relResult(statistic=1.2374634887003975e-13, pvalue=0.9999999999999013)
+
+
+
+
+```python
+random_forest.fit(X,y_categorical)
+pred_y = random_forest.predict(X)
+print("paired t-test for random forest result is \n")
+stats.ttest_rel(y_categorical, pred_y)
+```
+
+    paired t-test for random forest result is 
+    
+    
+
+
+
+
+    Ttest_relResult(statistic=9.064022064910278, pvalue=1.4630546520490245e-19)
+
+
+
+
+```python
+knn.fit(X,y_categorical)
+pred_y = knn.predict(X)
+print("paired t-test for k nearest neighbor result is \n")
+stats.ttest_rel(y_categorical, pred_y)
+```
+
+    paired t-test for k nearest neighbor result is 
+    
+    
+
+
+
+
+    Ttest_relResult(statistic=23.45994627419661, pvalue=6.88479830215365e-119)
+
+
+
+
+```python
+svm.fit(X,y_categorical)
+pred_y = svm.predict(X)
+print("paired t-test for support vector machine result is \n")
+stats.ttest_rel(y_categorical, pred_y)
+```
+
+    paired t-test for support vector machine result is 
+    
+    
+
+
+
+
+    Ttest_relResult(statistic=39.954277306310075, pvalue=0.0)
+
+
+
+From above result, it is interesting to see that we failed reject null hypothesis (i.e. there is no difference between
+the predicted value and ground truth for multi-linear regression paired-t test) but reject the null hypothesis (that is, there IS a difference)
+for the rest of three paired-t test. However, according to the accuracy score, random forest model achieved the highest. Why does this happen?
+
+According the formula that calculate t-value, we need to find the standard deviation of the difference between two groups. This standard deviation doesn't
+make sense when it comes to category. You can think it as using l2 loss (mean squared error) instead of cross-entropy loss for categorical problem. Therefore,
+we'd better directly use accuracy score for model-model comparison.
+
 ## 6. Future Application <a name="future-app"></a>
 TODO:
 ## 7. Reference and External Link <a name="ref-and-extlink"></a>
@@ -753,4 +883,5 @@ TODO:
  - https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
  - https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
 
-###
+#### paired-t test reading:
+ - https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/SAS/SAS4-OneSampleTtest/SAS4-OneSampleTtest7.html
