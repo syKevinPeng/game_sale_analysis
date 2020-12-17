@@ -10,12 +10,14 @@
 5. [Machine Learning Model](#ml-model)<br>
     a. [What and Why](#what-why)<br>
     b. [Training](#training)<br>
-    c. [Result Anlysis and Demonstration](#result-and-demon)
+    c. [Result Anlysis and Demonstration](#result-ana-demon)
 6. [Future Application](#future-app)
 7. [Reference and External Link](#ref-and-extlink)
 
 ## 1. Introduction <a name="introduction"></a>
-TODO:
+(***We need a better opening***) Video game is one of the most exciting fields related to Computer Science, 
+the earliest video games were developed in the 1950s, which had very premitive features. With the development of 
+hardware and graphic technology, now video games can have lifelike graphics, fancy visual effects, thrilling action systems 
 
 ## 2. Install Packages <a name="install-pkg"></a>
 ```
@@ -39,13 +41,22 @@ import kaggle
 
 or directly download from kaggle webpage: [https://www.kaggle.com/ashaheedq/video-games-sales-2019](https://www.kaggle.com/ashaheedq/video-games-sales-2019)_
 ## 4. Preprocessing <a name="preprocessing"></a>
-In this section, we will load and process the two datasets, "vgsales-12-4-2019.csv" which is our main dataset and "video_games.csv" which is an additional dataset we will use to fill in some important missing values like "Global_Sales" and "Critic_Score" in the first dataset.
-#### Datasets
-"vgsales-12-4-2019.csv" is a dataset with 55,792 records of game sales collected by 2019, it is loaded from Kaggle. There are missing values in the column "Global_Sales", since this column is important in our analysis, we load another dataset "video_games.csv" to fill in these values as many as possbile.
+In this section, we will load and process the two datasets: "vgsales-12-4-2019.csv" is our main dataset and "video_games.csv" 
+is a complementary dataset we will use to fill in  important missing values like "Global_Sales" and "Critic_Score" in the first dataset.
+**Datasets**
+"vgsales-12-4-2019.csv" is a dataset with 55,792 records of game sales collected by 2019, it is loaded from Kaggle. 
+There are missing values in the column "Global_Sales", since this column is important in our analysis, 
+we load another dataset "video_games.csv" to fill in these values as many as possbile.
 
-"video_games.csv" is a dataset of Steam game sales, we load it from [Github](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-30). It has a cloumn "owners" which includes a range of the number of players that own the game, we take the median of this range as the value to replace NaN in the column "Global_Sales", and we will do the same for the missing values in "Critic_Score". To merge the two datasets after doing necessary processing, we will use a LEFT JOIN on the columns "Name" and "Year".
+"video_games.csv" is a dataset of Steam game sales,
+ we load it from [Github](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-30). 
+ It has a cloumn "owners" which includes a range of the number of players that own the game, 
+ we take the median of this range as the value to replace NaN in the column "Global_Sales", 
+ and we will do the same for the missing values in "Critic_Score". To merge the two datasets after doing necessary 
+ processing, we will use a LEFT JOIN on the columns "Name" and "Year".
 ### 4.a. Load and Clean Data <a name="load-and-clean"></a>
-In the following cell we import the libraries we will use for data preprocessing, then we load the datasets using pandas.read_csv() function and create a preview of the datasets using df.head() function.
+In the following cells we import the libraries we will use for data preprocessing, 
+then we load the datasets using pandas.read_csv() function and create a preview of the datasets using df.head() function.
 
 
 ```python
@@ -345,8 +356,16 @@ additional.head()
 
 
 
-#### Clean the additional dataset
-Now we process the additional dataset. First, we drop rows with NaN values in the columns "owners" and "release_date", and reset the index of the dataframe. Next, we divide the values in the column "metascore" by 10 to make the unit match in both tables, and store the results in a new column "Critic_Score". To calculate the median of the range of owners, we convert the values in column "owners" to string, then iterate through the dataframe to split the string and convert the results to integers, finally we calculate the result (in millions). In the same loop, we also extract the value of year from the column "release_date". Note that there are NaN values in the column "Critic_Score" but we do not drop them because our main goal is to get more values for "Global_Sales". After renaming the columns that we will use to merge the datasets (by copying to new columns and dropping the original columns), we finish processing the additional dataset.
+**Clean the additional dataset**
+Now we process the additional dataset. First, we drop rows with NaN values in the columns "owners" and "release_date" 
+because we do not want to have missing values in these columns, and reset the index of the dataframe. Next, we divide 
+the values in the column "metascore" by 10 to make the unit (a float with one decimal place) match in both tables, and 
+store the results in a new column "Critic_Score". To calculate the median of the range of owners, we convert the values 
+in the column "owners" to string, then iterate through the dataframe to split the string and convert the results to integers, 
+finally we calculate the result (in millions). In the same loop, we also extract the value of year from the column "release_date".
+ Note that there are NaN values in the column "Critic_Score" but we do not drop them because our main goal is to get more values 
+ for "Global_Sales". After renaming the columns that we will use to merge the datasets 
+ (by copying to new columns and dropping the original columns), we finish processing the additional dataset.
 
 
 ```python
@@ -451,10 +470,13 @@ additional.head()
 
 
 
-#### Merge the main dataset and the additional dataset
-Before merging the two datasets, we drop rows having missing values in the column "Year" as we will use this column and the column "Name" in merging. Then we drop columns we will not use in data visualization and data analysis, which are 'Rank', 'basename', 'Total_Shipped', 'Platform', 'Publisher', 'VGChartz_Score', 'Last_Update', 'url', 'status', 'Vgchartzscore', 'img_url', 'User_Score'. 
+**Merge the main dataset and the additional dataset**
+Before merging the two datasets, we drop rows having missing values in the column "Year" as we will use this column 
+and the column "Name" in merging. Then we drop columns we will not use in data visualization and data analysis, which 
+are 'Rank', 'basename', 'Total_Shipped', 'Platform', 'Publisher', 'VGChartz_Score', 'Last_Update', 'url', 'status', 
+'Vgchartzscore', 'img_url', 'User_Score'. 
 
-The type of join we choose is left join, as we do not want to add excessive records from the additional dataset.
+The type of join we choose is left join, because we do not want to add excessive records from the additional dataset.
 
 
 ```python
@@ -578,10 +600,18 @@ df.head()
 
 
 
-#### Process the merged dataset
-First we drop rows with missing values in the columns "Developer" and "Genre", and reset the index. We create a new column "Sales_Ranking" referring to a new category, when a game has over 10 million sales, its Sales_Ranking is 4, a game with 5-10 million sales has a Sales_Ranking of 3, a game with 1-5 million sales has a Sales_Ranking of 2, a game with sales lower than 1 million will have Sales_Ranking of 1.
+**Process the merged dataset**
+First we drop rows with missing values in the columns "Developer" and "Genre", and reset the index. We create a new 
+column "Sales_Ranking" referring to a new category, when a game has over 10 million sales, its Sales_Ranking is 4, 
+a game with 5-10 million sales has a Sales_Ranking of 3, a game with 1-5 million sales has a Sales_Ranking of 2, 
+a game with sales lower than 1 million will have Sales_Ranking of 1.
 
-For data analysis, we need to convert categorical variable to numerical variable. We choose to use label encoding on the three categories, "Genre", "ESRB_Rating" and "Developer". Since the total number of developers is large and we will use "Genre" in data visualization, we will process "Developer" and "Genre" later. To create the dataframe for data analysis, we need to drop columns that we will not use, which are 'Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'. Also, we will normalize the numerical values in the columns "Global_Sales" and "NA_Sales" by using the sklearn.preprocessing module.
+For data analysis, we need to convert categorical variable to numerical variable. We choose to use label encoding on 
+the three categories, "Genre", "ESRB_Rating" and "Developer" because it is easier to process numerical values in data 
+analysis than processing string values. Since the total number of developers is large and we will use "Genre" 
+in data visualization, we will process "Developer" and "Genre" later. To create the dataframe for data analysis,
+ we need to drop columns that we will not use, which are 'Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'.
+  Also, we will normalize the numerical values in the columns "Global_Sales" and "NA_Sales" by using the sklearn.preprocessing module.
 
 
 ```python
@@ -609,8 +639,9 @@ df['ESRB_Rating'] = le.fit_transform(df['ESRB_Rating'])
 # df = df.join(df_temp)
 ```
 
-#### Dataframe for data visualization
-Now we create the dataframe for data visualization
+**Dataframe for data visualization**
+Now we create the dataframe for data visualization. We drop rows with NaN values in the columns "Global_Sales" 
+and "NA_Sales" because these missing values can not be used in plotting the graphs.
 
 
 ```python
@@ -738,8 +769,10 @@ df_for_visualization.head()
 
 
 
-#### Dataframe for data analysis
-To create the dataframe for data analysis, we need to drop columns that we will not use, which are 'Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'. Also, we will normalize the numerical values in the columns "Global_Sales" and "NA_Sales" by using the sklearn.preprocessing module.
+**Dataframe for data analysis**
+To create the dataframe for data analysis, we need to drop columns that we will not use, 
+which are 'Name', 'PAL_Sales', 'JP_Sales', 'Other_Sales', 'Critic_Score'. Also, we will normalize 
+the numerical values in the columns "Global_Sales" and "NA_Sales" by using the sklearn.preprocessing module.
 
 
 ```python
@@ -1086,8 +1119,9 @@ average difference is not 0. We choose alpha value = 0.05
 from scipy import stats
 muti_linear_regression.fit(X,y_categorical)
 pred_y = muti_linear_regression.predict(X)
-print("paired t-test for random multi-linear regression is \n")
-stats.ttest_rel(y_categorical, pred_y)
+(statistics, pvalue) = stats.ttest_rel(y_categorical, pred_y)
+print("paired t-test for  multi-linear regression has the following result")
+print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
     paired t-test for random multi-linear regression is 
@@ -1105,8 +1139,9 @@ stats.ttest_rel(y_categorical, pred_y)
 ```python
 random_forest.fit(X,y_categorical)
 pred_y = random_forest.predict(X)
-print("paired t-test for random forest result is \n")
-stats.ttest_rel(y_categorical, pred_y)
+(statistics, pvalue) = stats.ttest_rel(y_categorical, pred_y)
+print("paired t-test for random forest  has the following result")
+print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
     paired t-test for random forest result is 
@@ -1124,8 +1159,9 @@ stats.ttest_rel(y_categorical, pred_y)
 ```python
 knn.fit(X,y_categorical)
 pred_y = knn.predict(X)
-print("paired t-test for k nearest neighbor result is \n")
-stats.ttest_rel(y_categorical, pred_y)
+(statistics, pvalue) = stats.ttest_rel(y_categorical, pred_y)
+print("paired t-test for k-nearest neightbor has the following result")
+print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
     paired t-test for k nearest neighbor result is 
@@ -1143,8 +1179,9 @@ stats.ttest_rel(y_categorical, pred_y)
 ```python
 svm.fit(X,y_categorical)
 pred_y = svm.predict(X)
-print("paired t-test for support vector machine result is \n")
-stats.ttest_rel(y_categorical, pred_y)
+(statistics, pvalue) = stats.ttest_rel(y_categorical, pred_y)
+print("paired t-test for support vector machine has the following result")
+print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
     paired t-test for support vector machine result is 
@@ -1184,6 +1221,8 @@ TODO:
 
 #### paired-t test reading:
  - https://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/SAS/SAS4-OneSampleTtest/SAS4-OneSampleTtest7.html
+
+
 
 
 ```python
