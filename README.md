@@ -19,7 +19,8 @@ Have you ever dreamed about swinging a Great Sword fight against a giant ancient
 Have you ever dreamed about driving Bugatti Veyron Super Sport in the city while all your opponents are in your rear mirror?
 Playing video games is becoming a more and more popular option for people to entertain themselves, especially during this hard time of COVID-19.
 The value of the global gaming market almost doubled from 2012 to 2020. Now, it is a 150-billion-dollar industry with over ten thousand of games developed and published each year.
-As we are interested in what makes a game popular, we will use data science techniques to explore and analyze the video game sales data, 
+As we are interested in what makes a game popular, we will use data science techniques to explore and analyze the video game sales data, and try to predict game sales.
+
 
 ## 2. Install Packages <a name="install-pkg"></a>
 ```
