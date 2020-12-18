@@ -259,7 +259,7 @@ graph_df1.groupby(["Year"]).sum()["Global_Sales"].plot(ax=ax)
 plt.xlabel("Year", fontsize = 15)
 plt.ylabel("Number of purchases (Million)", fontsize = 15)
 plt.title("Video Game Annual Sales over Year", fontweight = "bold", fontsize = 18)
-plt.show()
+plt.savefig("images/plot1.png")
 ```
 
 
@@ -267,6 +267,8 @@ plt.show()
 ![png](README_files/README_22_0.png)
     
 
+
+<img src="images/plot1.png">
 
 Interpretation: The graph we get is a bit unexpected. In our previous prediction, the graph would have a number of
 purchases gradually increase as the year goes, which means as time goes, more games are purchased by people,
@@ -290,7 +292,6 @@ graph_df2 = graph_df2.reset_index(drop = True)
 # Keep first 50 data
 graph_df2 = graph_df2.head(50)
 graph_df2["Rank"] = np.arange(1,51)
-# graph_df2
 ```
 
 
@@ -300,20 +301,16 @@ fig = plt.figure(figsize = (15, 10))
 plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
 plt.xlabel("Number of purchases (Million)", fontsize = 15)
 plt.title("TOP 50 Global Best-selling Video Games in 2016", fontweight = "bold", fontsize = 18)
+plt.savefig("images/plot2.png")
 ```
 
 
-
-
-    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2016')
-
-
-
-
     
-![png](README_files/README_25_1.png)
+![png](README_files/README_26_0.png)
     
 
+
+<img src="images/plot2.png">
 
 
 ```python
@@ -330,20 +327,16 @@ fig = plt.figure(figsize = (15, 10))
 plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
 plt.xlabel("Number of purchases (Million)", fontsize = 15)
 plt.title("TOP 50 Global Best-selling Video Games in 2017", fontweight = "bold", fontsize = 18)
+plt.savefig("images/plot3.png")
 ```
 
 
-
-
-    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2017')
-
-
-
-
     
-![png](README_files/README_27_1.png)
+![png](README_files/README_29_0.png)
     
 
+
+<img src="images/plot3.png">
 
 
 ```python
@@ -360,20 +353,16 @@ fig = plt.figure(figsize = (15, 10))
 plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
 plt.xlabel("Number of purchases (Million)", fontsize = 15)
 plt.title("TOP 50 Global Best-selling Video Games in 2018", fontweight = "bold", fontsize = 18)
+plt.savefig("images/plot4.png")
 ```
 
 
-
-
-    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2018')
-
-
-
-
     
-![png](README_files/README_29_1.png)
+![png](README_files/README_32_0.png)
     
 
+
+<img src="images/plot4.png">
 
 From the graph, we see that the most best-selling video game in 2016 was "FIFA 17", in 2017 was "Call of Duty: WWII", and in the year 2018 was "Red Dead Redemption", followed by "Call of Duty: Black Ops III" and "FIFA 19". Comparing the three plots, we can discover a pattern. It seems that each year, there are a few games that are very successful and receive really high amount of sales. And as rank goes down, the sale will quickly drop at first, and then remain at a relatively mild decreasing slope after the top 15 games.
 
@@ -388,14 +377,16 @@ temp = graph_df3.groupby(["Genre"]).count()["Name"]
 temp.sort_values(ascending = False).plot(kind = "pie", ax=ax, autopct = '%1.1f%%')
 plt.ylabel("Name of Genres", fontsize = 15)
 plt.title("Percentage of Video Games per Genre", fontweight = "bold", fontsize = 18)
-plt.show()
+plt.savefig("images/plot5.png")
 ```
 
 
     
-![png](README_files/README_31_0.png)
+![png](README_files/README_35_0.png)
     
 
+
+<img src="images/plot5.png">
 
 As we observe from the pie chart above, among all video game genres, Action, Sports, Shooter, and Racing video games occupied a great amount of the video game industry (50.4%). It's reasonable to say that those four categories of games have a relatively larger group of customers and popularity among all genres. If a developer wants to start a new game project, these 4 genres are good choices to pick.
 
@@ -425,20 +416,16 @@ graph4.T.plot(grid = True, figsize=(15,10))
 plt.title("Number of Games in Different Genres from 1900 to 2018", fontweight = "bold", fontsize = 18)
 plt.ylabel("Number of Games", fontsize = 15)
 plt.xlabel("Year", fontsize = 15)
+plt.savefig("images/plot6.png")
 ```
 
 
-
-
-    Text(0.5, 0, 'Year')
-
-
-
-
     
-![png](README_files/README_34_1.png)
+![png](README_files/README_39_0.png)
     
 
+
+<img src="images/plot6.png">
 
 Let's further specify the graph and look at the trends of the 5 most popular genres, among all of the genres.
 
@@ -455,20 +442,16 @@ graph4a.T.plot(grid = True, figsize=(15,10))
 plt.title("Number of Games in Top 5 Genres from 1900 to 2018", fontweight = "bold", fontsize = 18)
 plt.ylabel("Number of Games", fontsize = 15)
 plt.xlabel("Year", fontsize = 15)
+plt.savefig("images/plot7.png")
 ```
 
 
-
-
-    Text(0.5, 0, 'Year')
-
-
-
-
     
-![png](README_files/README_36_1.png)
+![png](README_files/README_42_0.png)
     
 
+
+<img src="images/plot7.png">
 
 Interpretation:
  - Shape of the graph: We see from the major left part of the graph that games in those genres have grown a lot since 1990, especially for the top 5 genres, which are growing almost at exponential. Most of the other genres experienced a linear growth, and a few unpopular genres have very limited growth.
@@ -490,20 +473,16 @@ plt.xlabel("North America Sales (Million)", fontsize = 20)
 plt.ylabel("Global Sales (Million)", fontsize = 20)
 fit = np.polyfit(x = x, y = y, deg = 1)
 plt.plot(x, fit[0] * x + fit[1], color="red")
+plt.savefig("images/plot8.png")
 ```
 
 
-
-
-    [<matplotlib.lines.Line2D at 0x2910ac136a0>]
-
-
-
-
     
-![png](README_files/README_38_1.png)
+![png](README_files/README_45_0.png)
     
 
+
+<img src="images/plot8.png">
 
 From the graph, we see lots of data points are located at the lower-left corner. This is because we set the sale amount in millions, and many video games in the industry do not have sales large enough. We discover that there exists a positive correlation between North America Sales and Global Sales. This indicates that the increment or decrement of video game sales in North America may lead to similar movements in global markets. And there is a form of dependence between the global market and the North American market, so the data collected in NA could also be used in the prediction of the global market.
 
@@ -607,8 +586,8 @@ print('The average score for linear regression is ',np.average(linear_score))
 print("The standard error of the score is ", np.std(linear_score))
 ```
 
-    The average score for linear regression is  0.8410116950650812
-    The standard error of the score is  0.034909738244821714
+    The average score for linear regression is  0.8424202980666509
+    The standard error of the score is  0.03612723687235236
     
 
 
@@ -626,12 +605,12 @@ print("The average score for SVM is ", np.average(svm_score))
 print("The standard error of the score is ", np.std(svm_score))
 ```
 
-    The average score for Random Forest is  0.9441310242484985
-    The standard error of the score is  0.006005405576620894
-    The average score for kNN is  0.8712562447070523
-    The standard error of the score is  0.005861116764862995
-    The average score for SVM is  0.8885270649294144
-    The standard error of the score is  0.0138320242188629
+    The average score for Random Forest is  0.9442180422503478
+    The standard error of the score is  0.004712117958993125
+    The average score for kNN is  0.8733701605948303
+    The standard error of the score is  0.003909255185019338
+    The average score for SVM is  0.8972463464093421
+    The standard error of the score is  0.016865616208509227
     
 
 ### 5.c Result Anlysis and Demonstration <a name="result-and-demon"></a>
@@ -651,15 +630,16 @@ ax.set_title('Accuracy of Four Models For Game Sale Prediction')
 ax.yaxis.grid(True)
 ax.set_xlabel("Model")
 ax.set_ylabel('Accuracy Score')
-plt.show()
+plt.savefig("images/plot9.png")
 ```
 
 
     
-![png](README_files/README_52_0.png)
+![png](README_files/README_59_0.png)
     
 
 
+<img src="images/plot8.png">
 Random forest model has the best accuracy score and I think bagging and bootstrap could be the reason why it outperformed other models.
 Also, the prediction for categorical variable generally better than the numerical prediction becuase, intuitively, predicting a category is
 easier than a specific number.
@@ -679,7 +659,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for  multi-linear regression has the following result
-    test statistics = 0.0 
+    test statistics = -0.0 
     p value = 1.0
     
 
@@ -693,7 +673,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for random forest  has the following result
-    test statistics = 7.883 
+    test statistics = 7.807 
     p value = 0.0
     
 
@@ -707,7 +687,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for k-nearest neightbor has the following result
-    test statistics = 23.013 
+    test statistics = 22.912 
     p value = 0.0
     
 
@@ -721,7 +701,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for support vector machine has the following result
-    test statistics = 37.174 
+    test statistics = 38.561 
     p value = 0.0
     
 
