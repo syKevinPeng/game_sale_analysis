@@ -246,8 +246,6 @@ First, in order to get a general picture of video game sale in recent years, we 
 
 
 ```python
-import matplotlib
-matplotlib.use('TkAgg', force=True)
 from matplotlib import pyplot as plt
 graph_df1 = df.copy(deep=True)
 
@@ -261,12 +259,63 @@ graph_df1.groupby(["Year"]).sum()["Global_Sales"].plot(ax=ax)
 plt.xlabel("Year", fontsize = 15)
 plt.ylabel("Number of purchases (Million)", fontsize = 15)
 plt.title("Video Game Annual Sales over Year", fontweight = "bold", fontsize = 18)
-plt.savefig("images/plot1.png")
 ```
 
 
+
+
+    Text(0.5, 1.0, 'Video Game Annual Sales over Year')
+
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B655F7F0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B655F7F0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B655F7F0>
     
-![png](README_files/README_21_0.png)
+
+
+    
+![png](README_files/README_21_2.png)
     
 
 
@@ -303,12 +352,63 @@ fig = plt.figure(figsize = (15, 10))
 plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
 plt.xlabel("Number of purchases (Million)", fontsize = 15)
 plt.title("TOP 50 Global Best-selling Video Games in 2016", fontweight = "bold", fontsize = 18)
-plt.savefig("images/plot2.png")
 ```
 
 
+
+
+    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2016')
+
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B2FE7460>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B2FE7460>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B2FE7460>
     
-![png](README_files/README_25_0.png)
+
+
+    
+![png](README_files/README_25_2.png)
     
 
 
@@ -329,12 +429,63 @@ fig = plt.figure(figsize = (15, 10))
 plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
 plt.xlabel("Number of purchases (Million)", fontsize = 15)
 plt.title("TOP 50 Global Best-selling Video Games in 2017", fontweight = "bold", fontsize = 18)
-plt.savefig("images/plot3.png")
 ```
 
 
+
+
+    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2017')
+
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5330EE0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5330EE0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5330EE0>
     
-![png](README_files/README_28_0.png)
+
+
+    
+![png](README_files/README_28_2.png)
     
 
 
@@ -355,12 +506,63 @@ fig = plt.figure(figsize = (15, 10))
 plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
 plt.xlabel("Number of purchases (Million)", fontsize = 15)
 plt.title("TOP 50 Global Best-selling Video Games in 2018", fontweight = "bold", fontsize = 18)
-plt.savefig("images/plot4.png")
 ```
 
 
+
+
+    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2018')
+
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0AFBA09D0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0AFBA09D0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0AFBA09D0>
     
-![png](README_files/README_31_0.png)
+
+
+    
+![png](README_files/README_31_2.png)
     
 
 
@@ -379,12 +581,63 @@ temp = graph_df3.groupby(["Genre"]).count()["Name"]
 temp.sort_values(ascending = False).plot(kind = "pie", ax=ax, autopct = '%1.1f%%')
 plt.ylabel("Name of Genres", fontsize = 15)
 plt.title("Percentage of Video Games per Genre", fontweight = "bold", fontsize = 18)
-plt.savefig("images/plot5.png")
 ```
 
 
+
+
+    Text(0.5, 1.0, 'Percentage of Video Games per Genre')
+
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5C1FD30>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5C1FD30>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5C1FD30>
     
-![png](README_files/README_34_0.png)
+
+
+    
+![png](README_files/README_34_2.png)
     
 
 
@@ -418,12 +671,63 @@ graph4.T.plot(grid = True, figsize=(15,10))
 plt.title("Number of Games in Different Genres from 1900 to 2018", fontweight = "bold", fontsize = 18)
 plt.ylabel("Number of Games", fontsize = 15)
 plt.xlabel("Year", fontsize = 15)
-plt.savefig("images/plot6.png")
 ```
 
 
+
+
+    Text(0.5, 0, 'Year')
+
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B7CA1160>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B7CA1160>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B7CA1160>
     
-![png](README_files/README_38_0.png)
+
+
+    
+![png](README_files/README_38_2.png)
     
 
 
@@ -444,12 +748,63 @@ graph4a.T.plot(grid = True, figsize=(15,10))
 plt.title("Number of Games in Top 5 Genres from 1900 to 2018", fontweight = "bold", fontsize = 18)
 plt.ylabel("Number of Games", fontsize = 15)
 plt.xlabel("Year", fontsize = 15)
-plt.savefig("images/plot7.png")
 ```
 
 
+
+
+    Text(0.5, 0, 'Year')
+
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5A16EE0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5A16EE0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B5A16EE0>
     
-![png](README_files/README_41_0.png)
+
+
+    
+![png](README_files/README_41_2.png)
     
 
 
@@ -475,12 +830,63 @@ plt.xlabel("North America Sales (Million)", fontsize = 20)
 plt.ylabel("Global Sales (Million)", fontsize = 20)
 fit = np.polyfit(x = x, y = y, deg = 1)
 plt.plot(x, fit[0] * x + fit[1], color="red")
-plt.savefig("images/plot8.png")
 ```
 
 
+
+
+    [<matplotlib.lines.Line2D at 0x2d0b65d1d00>]
+
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B53316A0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B53316A0>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B53316A0>
     
-![png](README_files/README_44_0.png)
+
+
+    
+![png](README_files/README_44_2.png)
     
 
 
@@ -588,8 +994,8 @@ print('The average score for linear regression is ',np.average(linear_score))
 print("The standard error of the score is ", np.std(linear_score))
 ```
 
-    The average score for linear regression is  0.8373468383809601
-    The standard error of the score is  0.04052999560360981
+    The average score for linear regression is  0.8393339131354883
+    The standard error of the score is  0.039224220045108324
     
 
 
@@ -607,12 +1013,12 @@ print("The average score for SVM is ", np.average(svm_score))
 print("The standard error of the score is ", np.std(svm_score))
 ```
 
-    The average score for Random Forest is  0.9438675617089715
-    The standard error of the score is  0.006384104625956436
-    The average score for kNN is  0.8737225835023192
-    The standard error of the score is  0.008335695162753393
-    The average score for SVM is  0.89469236805507
-    The standard error of the score is  0.017764190302032745
+    The average score for Random Forest is  0.9437783682570762
+    The standard error of the score is  0.004225781903176821
+    The average score for kNN is  0.8716955302271016
+    The standard error of the score is  0.0064990908000284045
+    The average score for SVM is  0.8873790488621619
+    The standard error of the score is  0.016473477435981453
     
 
 ### 5.c Result Anlysis and Demonstration <a name="result-and-demon"></a>
@@ -632,23 +1038,13 @@ ax.set_title('Accuracy of Four Models For Game Sale Prediction')
 ax.yaxis.grid(True)
 ax.set_xlabel("Model")
 ax.set_ylabel('Accuracy Score')
-plt.savefig("images/plot9.png")
 ```
 
 
-    ---------------------------------------------------------------------------
 
-    TypeError                                 Traceback (most recent call last)
 
-    <ipython-input-110-ca896f28cc78> in <module>
-         11 ax.set_xlabel("Model")
-         12 ax.set_ylabel('Accuracy Score')
-    ---> 13 plt.imshow()
-         14 plt.show()
-         15 
-    
+    Text(0, 0.5, 'Accuracy Score')
 
-    TypeError: imshow() missing 1 required positional argument: 'X'
 
 
     Exception in Tkinter callback
@@ -665,7 +1061,7 @@ plt.savefig("images/plot9.png")
         self.figure.draw(self.renderer)
       File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
         def _draw(renderer): raise Done(renderer)
-    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B0714D00>
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B46C62B0>
     Exception in Tkinter callback
     Traceback (most recent call last):
       File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
@@ -678,7 +1074,7 @@ plt.savefig("images/plot9.png")
         self.figure.draw(self.renderer)
       File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
         def _draw(renderer): raise Done(renderer)
-    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B0714D00>
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B46C62B0>
     Exception in Tkinter callback
     Traceback (most recent call last):
       File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
@@ -693,7 +1089,7 @@ plt.savefig("images/plot9.png")
         self.figure.draw(self.renderer)
       File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
         def _draw(renderer): raise Done(renderer)
-    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B0714D00>
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B46C62B0>
     
 
 
@@ -721,6 +1117,11 @@ print("paired t-test for  multi-linear regression has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
+    paired t-test for  multi-linear regression has the following result
+    test statistics = -0.0 
+    p value = 1.0
+    
+
 
 ```python
 random_forest.fit(X,y_categorical)
@@ -729,6 +1130,11 @@ pred_y = random_forest.predict(X)
 print("paired t-test for random forest  has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
+
+    paired t-test for random forest  has the following result
+    test statistics = 7.807 
+    p value = 0.0
+    
 
 
 ```python
@@ -739,6 +1145,11 @@ print("paired t-test for k-nearest neightbor has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
+    paired t-test for k-nearest neightbor has the following result
+    test statistics = 23.013 
+    p value = 0.0
+    
+
 
 ```python
 svm.fit(X,y_categorical)
@@ -747,6 +1158,11 @@ pred_y = svm.predict(X)
 print("paired t-test for support vector machine has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
+
+    paired t-test for support vector machine has the following result
+    test statistics = 37.174 
+    p value = 0.0
+    
 
 From above result, it is interesting to see that we failed reject null hypothesis (i.e. there is no difference between
 the predicted value and ground truth for multi-linear regression paired-t test) but reject the null hypothesis (that is, there IS a difference)
