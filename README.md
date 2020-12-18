@@ -56,6 +56,7 @@ or directly download from kaggle webpage: [https://www.kaggle.com/ashaheedq/vide
 ## 4. Preprocessing <a name="preprocessing"></a>
 In this section, we will load and process the two datasets: "vgsales-12-4-2019.csv" is our main dataset and "video_games.csv"
 is a complementary dataset we will use to fill in  important missing values like "Global_Sales" and "Critic_Score" in the first dataset.
+
 **Datasets**
 
 "vgsales-12-4-2019.csv" is a kaggle dataset with around 50000 records of game sales collected in 2019.
