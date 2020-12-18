@@ -630,7 +630,8 @@ ax.set_title('Accuracy of Four Models For Game Sale Prediction')
 ax.yaxis.grid(True)
 ax.set_xlabel("Model")
 ax.set_ylabel('Accuracy Score')
-plt.savefig("images/plot9.png")
+plt.imshow()
+plt.show()
 ```
 
 
