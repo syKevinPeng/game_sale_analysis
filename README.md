@@ -246,7 +246,9 @@ First, in order to get a general picture of video game sale in recent years, we 
 
 
 ```python
-import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg', force=True)
+from matplotlib import pyplot as plt
 graph_df1 = df.copy(deep=True)
 
 # Trim the data
@@ -264,7 +266,7 @@ plt.savefig("images/plot1.png")
 
 
     
-![png](README_files/README_22_0.png)
+![png](README_files/README_21_0.png)
     
 
 
@@ -306,7 +308,7 @@ plt.savefig("images/plot2.png")
 
 
     
-![png](README_files/README_26_0.png)
+![png](README_files/README_25_0.png)
     
 
 
@@ -332,7 +334,7 @@ plt.savefig("images/plot3.png")
 
 
     
-![png](README_files/README_29_0.png)
+![png](README_files/README_28_0.png)
     
 
 
@@ -358,7 +360,7 @@ plt.savefig("images/plot4.png")
 
 
     
-![png](README_files/README_32_0.png)
+![png](README_files/README_31_0.png)
     
 
 
@@ -382,7 +384,7 @@ plt.savefig("images/plot5.png")
 
 
     
-![png](README_files/README_35_0.png)
+![png](README_files/README_34_0.png)
     
 
 
@@ -421,7 +423,7 @@ plt.savefig("images/plot6.png")
 
 
     
-![png](README_files/README_39_0.png)
+![png](README_files/README_38_0.png)
     
 
 
@@ -447,7 +449,7 @@ plt.savefig("images/plot7.png")
 
 
     
-![png](README_files/README_42_0.png)
+![png](README_files/README_41_0.png)
     
 
 
@@ -478,7 +480,7 @@ plt.savefig("images/plot8.png")
 
 
     
-![png](README_files/README_45_0.png)
+![png](README_files/README_44_0.png)
     
 
 
@@ -586,8 +588,8 @@ print('The average score for linear regression is ',np.average(linear_score))
 print("The standard error of the score is ", np.std(linear_score))
 ```
 
-    The average score for linear regression is  0.8391205720518414
-    The standard error of the score is  0.04322241989727787
+    The average score for linear regression is  0.8373468383809601
+    The standard error of the score is  0.04052999560360981
     
 
 
@@ -605,12 +607,12 @@ print("The average score for SVM is ", np.average(svm_score))
 print("The standard error of the score is ", np.std(svm_score))
 ```
 
-    The average score for Random Forest is  0.9441318011949436
-    The standard error of the score is  0.006730163145618875
-    The average score for kNN is  0.8724886371582408
-    The standard error of the score is  0.005762693826538113
-    The average score for SVM is  0.8898518363129231
-    The standard error of the score is  0.015341592406248538
+    The average score for Random Forest is  0.9438675617089715
+    The standard error of the score is  0.006384104625956436
+    The average score for kNN is  0.8737225835023192
+    The standard error of the score is  0.008335695162753393
+    The average score for SVM is  0.89469236805507
+    The standard error of the score is  0.017764190302032745
     
 
 ### 5.c Result Anlysis and Demonstration <a name="result-and-demon"></a>
@@ -630,13 +632,73 @@ ax.set_title('Accuracy of Four Models For Game Sale Prediction')
 ax.yaxis.grid(True)
 ax.set_xlabel("Model")
 ax.set_ylabel('Accuracy Score')
-plt.imshow()
-plt.show()
+plt.savefig("images/plot9.png")
 ```
 
 
+    ---------------------------------------------------------------------------
+
+    TypeError                                 Traceback (most recent call last)
+
+    <ipython-input-110-ca896f28cc78> in <module>
+         11 ax.set_xlabel("Model")
+         12 ax.set_ylabel('Accuracy Score')
+    ---> 13 plt.imshow()
+         14 plt.show()
+         15 
     
-![png](README_files/README_59_0.png)
+
+    TypeError: imshow() missing 1 required positional argument: 'X'
+
+
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B0714D00>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 242, in resize
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B0714D00>
+    Exception in Tkinter callback
+    Traceback (most recent call last):
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 1883, in __call__
+        return self.func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\tkinter\__init__.py", line 804, in callit
+        func(*args)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\_backend_tk.py", line 253, in idle_draw
+        self.draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_tkagg.py", line 9, in draw
+        super(FigureCanvasTkAgg, self).draw()
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backends\backend_agg.py", line 407, in draw
+        self.figure.draw(self.renderer)
+      File "E:\ProgramData\Miniconda3\envs\cmsc320\lib\site-packages\matplotlib\backend_bases.py", line 1544, in _draw
+        def _draw(renderer): raise Done(renderer)
+    matplotlib.backend_bases._get_renderer.<locals>.Done: <matplotlib.backends.backend_agg.RendererAgg object at 0x000002D0B0714D00>
+    
+
+
+    
+![png](README_files/README_58_2.png)
     
 
 
@@ -659,11 +721,6 @@ print("paired t-test for  multi-linear regression has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
-    paired t-test for  multi-linear regression has the following result
-    test statistics = -0.0 
-    p value = 1.0
-    
-
 
 ```python
 random_forest.fit(X,y_categorical)
@@ -672,11 +729,6 @@ pred_y = random_forest.predict(X)
 print("paired t-test for random forest  has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
-
-    paired t-test for random forest  has the following result
-    test statistics = 7.97 
-    p value = 0.0
-    
 
 
 ```python
@@ -687,11 +739,6 @@ print("paired t-test for k-nearest neightbor has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
 
-    paired t-test for k-nearest neightbor has the following result
-    test statistics = 22.893 
-    p value = 0.0
-    
-
 
 ```python
 svm.fit(X,y_categorical)
@@ -700,11 +747,6 @@ pred_y = svm.predict(X)
 print("paired t-test for support vector machine has the following result")
 print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,3)}')
 ```
-
-    paired t-test for support vector machine has the following result
-    test statistics = 35.077 
-    p value = 0.0
-    
 
 From above result, it is interesting to see that we failed reject null hypothesis (i.e. there is no difference between
 the predicted value and ground truth for multi-linear regression paired-t test) but reject the null hypothesis (that is, there IS a difference)
