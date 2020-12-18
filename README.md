@@ -586,8 +586,8 @@ print('The average score for linear regression is ',np.average(linear_score))
 print("The standard error of the score is ", np.std(linear_score))
 ```
 
-    The average score for linear regression is  0.8424202980666509
-    The standard error of the score is  0.03612723687235236
+    The average score for linear regression is  0.8391205720518414
+    The standard error of the score is  0.04322241989727787
     
 
 
@@ -605,12 +605,12 @@ print("The average score for SVM is ", np.average(svm_score))
 print("The standard error of the score is ", np.std(svm_score))
 ```
 
-    The average score for Random Forest is  0.9442180422503478
-    The standard error of the score is  0.004712117958993125
-    The average score for kNN is  0.8733701605948303
-    The standard error of the score is  0.003909255185019338
-    The average score for SVM is  0.8972463464093421
-    The standard error of the score is  0.016865616208509227
+    The average score for Random Forest is  0.9441318011949436
+    The standard error of the score is  0.006730163145618875
+    The average score for kNN is  0.8724886371582408
+    The standard error of the score is  0.005762693826538113
+    The average score for SVM is  0.8898518363129231
+    The standard error of the score is  0.015341592406248538
     
 
 ### 5.c Result Anlysis and Demonstration <a name="result-and-demon"></a>
@@ -673,7 +673,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for random forest  has the following result
-    test statistics = 7.807 
+    test statistics = 7.97 
     p value = 0.0
     
 
@@ -687,7 +687,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for k-nearest neightbor has the following result
-    test statistics = 22.912 
+    test statistics = 22.893 
     p value = 0.0
     
 
@@ -701,7 +701,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for support vector machine has the following result
-    test statistics = 38.561 
+    test statistics = 35.077 
     p value = 0.0
     
 
