@@ -151,7 +151,6 @@ df = df.drop(columns=['Rank', 'basename', 'Total_Shipped', 'Platform', 'Publishe
                       'Last_Update', 'url', 'status', 'Vgchartzscore', 'img_url',  'User_Score'])
 # left join on 'Name', 'Year'
 pd.merge(df, additional, on = ['Name', 'Year'] , how = 'left')
-print("")
 ```
 
     
@@ -195,12 +194,9 @@ for i in range(len(df)):
         df.loc[i, 'Sales_Ranking'] = 1
 
 le = LabelEncoder()
-# ohe = OneHotEncoder(handle_unknown = 'ignore')
 df['Sales_Ranking'] = df['Sales_Ranking'].astype(int)
 df = df.dropna(subset=['Global_Sales', 'ESRB_Rating'])
 df['ESRB_Rating'] = le.fit_transform(df['ESRB_Rating'])
-# df_temp = pd.DataFrame(ohe.fit_transform(df[['Genre']]).toarray())
-# df = df.join(df_temp)
 ```
 
 **Dataframe for data visualization**
@@ -587,7 +583,7 @@ ax.set_xlabel("Model")
 ax.set_ylabel('Accuracy Score')
 ```
 
-<img src="images/plot8.png">
+<img src="images/plot9.png">
 
 Random forest model has the best accuracy score and I think bagging and bootstrap could be the reason why it outperformed other models.
 Also, the prediction for categorical variable generally better than the numerical prediction becuase, intuitively, predicting a category is
