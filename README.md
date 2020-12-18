@@ -14,12 +14,12 @@
 7. [Reference and External Link](#ref-and-extlink)
 
 ## 1. Introduction <a name="introduction"></a>
-Have you dreamed about strolling around a dystopian metropole where violence, oppression, and cyberware implants aren't just common in 2077?
-Have you dreamed about holding a Great Sword fight against a giant ancient dragon in Monster World?
-Have you dreamed about driving Bugatti Veyron Super Sport in the city and all your opponents are in your rear mirror?
-Playing video games seems to be a more and more popular entertainment options for people, especially in the middle of pandemic.
-Gaming market values are almost double from 2012 to 2020. It's now a 150 billion industry with almost 10 thousands of game produced each year.
-In this project, we are interested in what makes a game popular and how much revenue it may generate.
+Have you ever dreamed about strolling around a dystopian metropole where violence, oppression, and cyberware implants are just common in 2077?
+Have you ever dreamed about swinging a Great Sword fight against a giant ancient dragon in Monster World?
+Have you ever dreamed about driving Bugatti Veyron Super Sport in the city while all your opponents are in your rear mirror?
+Playing video games is becoming a more and more popular option for people to entertain themselves, especially during this hard time of COVID-19.
+The value of the global gaming market almost doubled from 2012 to 2020. Now, it is a 150-billion-dollar industry with over ten thousand of games developed and published each year.
+As we are interested in what makes a game popular, we will use data science techniques to explore and analyze the video game sales data, 
 
 ## 2. Install Packages <a name="install-pkg"></a>
 ```
@@ -73,290 +73,13 @@ import locale
 locale.setlocale( locale.LC_ALL, 'en_US.UTF-8' )
 df = pd.read_csv("vgsales-12-4-2019.csv")
 additional = pd.read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-07-30/video_games.csv")
-df.head()
 ```
 
+**A preview of the main dataset**
+<img src="images/df1.png">
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Rank</th>
-      <th>Name</th>
-      <th>basename</th>
-      <th>Genre</th>
-      <th>ESRB_Rating</th>
-      <th>Platform</th>
-      <th>Publisher</th>
-      <th>Developer</th>
-      <th>VGChartz_Score</th>
-      <th>Critic_Score</th>
-      <th>...</th>
-      <th>NA_Sales</th>
-      <th>PAL_Sales</th>
-      <th>JP_Sales</th>
-      <th>Other_Sales</th>
-      <th>Year</th>
-      <th>Last_Update</th>
-      <th>url</th>
-      <th>status</th>
-      <th>Vgchartzscore</th>
-      <th>img_url</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Wii Sports</td>
-      <td>wii-sports</td>
-      <td>Sports</td>
-      <td>E</td>
-      <td>Wii</td>
-      <td>Nintendo</td>
-      <td>Nintendo EAD</td>
-      <td>NaN</td>
-      <td>7.7</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2006.0</td>
-      <td>NaN</td>
-      <td>http://www.vgchartz.com/game/2667/wii-sports/?...</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>/games/boxart/full_2258645AmericaFrontccc.jpg</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>Super Mario Bros.</td>
-      <td>super-mario-bros</td>
-      <td>Platform</td>
-      <td>NaN</td>
-      <td>NES</td>
-      <td>Nintendo</td>
-      <td>Nintendo EAD</td>
-      <td>NaN</td>
-      <td>10.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1985.0</td>
-      <td>NaN</td>
-      <td>http://www.vgchartz.com/game/6455/super-mario-...</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>/games/boxart/8972270ccc.jpg</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>Mario Kart Wii</td>
-      <td>mario-kart-wii</td>
-      <td>Racing</td>
-      <td>E</td>
-      <td>Wii</td>
-      <td>Nintendo</td>
-      <td>Nintendo EAD</td>
-      <td>NaN</td>
-      <td>8.2</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2008.0</td>
-      <td>11th Apr 18</td>
-      <td>http://www.vgchartz.com/game/6968/mario-kart-w...</td>
-      <td>1</td>
-      <td>8.7</td>
-      <td>/games/boxart/full_8932480AmericaFrontccc.jpg</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>PlayerUnknown's Battlegrounds</td>
-      <td>playerunknowns-battlegrounds</td>
-      <td>Shooter</td>
-      <td>NaN</td>
-      <td>PC</td>
-      <td>PUBG Corporation</td>
-      <td>PUBG Corporation</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2017.0</td>
-      <td>13th Nov 18</td>
-      <td>http://www.vgchartz.com/game/215988/playerunkn...</td>
-      <td>1</td>
-      <td>NaN</td>
-      <td>/games/boxart/full_8052843AmericaFrontccc.jpg</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>Wii Sports Resort</td>
-      <td>wii-sports-resort</td>
-      <td>Sports</td>
-      <td>E</td>
-      <td>Wii</td>
-      <td>Nintendo</td>
-      <td>Nintendo EAD</td>
-      <td>NaN</td>
-      <td>8.0</td>
-      <td>...</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2009.0</td>
-      <td>NaN</td>
-      <td>http://www.vgchartz.com/game/24656/wii-sports-...</td>
-      <td>1</td>
-      <td>8.8</td>
-      <td>/games/boxart/full_7295041AmericaFrontccc.jpg</td>
-    </tr>
-  </tbody>
-</table>
-<p>5 rows × 23 columns</p>
-</div>
-
-
-
-
-```python
-additional.head()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>number</th>
-      <th>game</th>
-      <th>release_date</th>
-      <th>price</th>
-      <th>owners</th>
-      <th>developer</th>
-      <th>publisher</th>
-      <th>average_playtime</th>
-      <th>median_playtime</th>
-      <th>metascore</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>Half-Life 2</td>
-      <td>Nov 16, 2004</td>
-      <td>9.99</td>
-      <td>10,000,000 .. 20,000,000</td>
-      <td>Valve</td>
-      <td>Valve</td>
-      <td>110.0</td>
-      <td>66.0</td>
-      <td>96.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>3</td>
-      <td>Counter-Strike: Source</td>
-      <td>Nov 1, 2004</td>
-      <td>9.99</td>
-      <td>10,000,000 .. 20,000,000</td>
-      <td>Valve</td>
-      <td>Valve</td>
-      <td>236.0</td>
-      <td>128.0</td>
-      <td>88.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>21</td>
-      <td>Counter-Strike: Condition Zero</td>
-      <td>Mar 1, 2004</td>
-      <td>9.99</td>
-      <td>10,000,000 .. 20,000,000</td>
-      <td>Valve</td>
-      <td>Valve</td>
-      <td>10.0</td>
-      <td>3.0</td>
-      <td>65.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>47</td>
-      <td>Half-Life 2: Deathmatch</td>
-      <td>Nov 1, 2004</td>
-      <td>4.99</td>
-      <td>5,000,000 .. 10,000,000</td>
-      <td>Valve</td>
-      <td>Valve</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>36</td>
-      <td>Half-Life: Source</td>
-      <td>Jun 1, 2004</td>
-      <td>9.99</td>
-      <td>2,000,000 .. 5,000,000</td>
-      <td>Valve</td>
-      <td>Valve</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+**A preview of the additional dataset**
+<img src="images/df2.png">
 
 **Clean the additional dataset**
 
@@ -395,83 +118,10 @@ additional['Name'] = additional['game']
 additional['Developer'] = additional['developer']
 additional['Global_Sales'] = additional['owners']
 additional = additional.drop(columns=['metascore', 'release_date', 'publisher', 'game', 'developer', 'owners'])
-additional.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Critic_Score</th>
-      <th>Year</th>
-      <th>Name</th>
-      <th>Developer</th>
-      <th>Global_Sales</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>9.6</td>
-      <td>2004</td>
-      <td>Half-Life 2</td>
-      <td>Valve</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>8.8</td>
-      <td>2004</td>
-      <td>Counter-Strike: Source</td>
-      <td>Valve</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>6.5</td>
-      <td>2004</td>
-      <td>Counter-Strike: Condition Zero</td>
-      <td>Valve</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>NaN</td>
-      <td>2004</td>
-      <td>Half-Life 2: Deathmatch</td>
-      <td>Valve</td>
-      <td>2.5</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>NaN</td>
-      <td>2004</td>
-      <td>Half-Life: Source</td>
-      <td>Valve</td>
-      <td>1.5</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+**A preview of the processed additional dataset**
+<img src="images/df3.png" style="width: 600px;">
 
 **Merge the main dataset and the additional dataset**
 
@@ -490,119 +140,14 @@ df = df.drop(columns=['Rank', 'basename', 'Total_Shipped', 'Platform', 'Publishe
                       'Last_Update', 'url', 'status', 'Vgchartzscore', 'img_url',  'User_Score'])
 # left join on 'Name', 'Year'
 pd.merge(df, additional, on = ['Name', 'Year'] , how = 'left')
-df.head()
+print("")
 ```
 
+    
+    
 
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Genre</th>
-      <th>ESRB_Rating</th>
-      <th>Developer</th>
-      <th>Critic_Score</th>
-      <th>Global_Sales</th>
-      <th>NA_Sales</th>
-      <th>PAL_Sales</th>
-      <th>JP_Sales</th>
-      <th>Other_Sales</th>
-      <th>Year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Wii Sports</td>
-      <td>Sports</td>
-      <td>E</td>
-      <td>Nintendo EAD</td>
-      <td>7.7</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2006</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Super Mario Bros.</td>
-      <td>Platform</td>
-      <td>NaN</td>
-      <td>Nintendo EAD</td>
-      <td>10.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>1985</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Mario Kart Wii</td>
-      <td>Racing</td>
-      <td>E</td>
-      <td>Nintendo EAD</td>
-      <td>8.2</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2008</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>PlayerUnknown's Battlegrounds</td>
-      <td>Shooter</td>
-      <td>NaN</td>
-      <td>PUBG Corporation</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2017</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Wii Sports Resort</td>
-      <td>Sports</td>
-      <td>E</td>
-      <td>Nintendo EAD</td>
-      <td>8.0</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2009</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+**A preview of the merged dataset**
+<img src="images/df4.png">
 
 **Process the merged dataset**
 
@@ -658,125 +203,10 @@ df = df.reset_index(drop = True)
 df = df[df['Global_Sales'] != 0.0]
 df_for_visualization = df.dropna(subset = ['Global_Sales', 'NA_Sales'])
 df_for_visualization = df_for_visualization.reset_index(drop = True)
-df_for_visualization.head()
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Name</th>
-      <th>Genre</th>
-      <th>ESRB_Rating</th>
-      <th>Developer</th>
-      <th>Critic_Score</th>
-      <th>Global_Sales</th>
-      <th>NA_Sales</th>
-      <th>PAL_Sales</th>
-      <th>JP_Sales</th>
-      <th>Other_Sales</th>
-      <th>Year</th>
-      <th>Sales_Ranking</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Grand Theft Auto V</td>
-      <td>Action</td>
-      <td>3</td>
-      <td>Rockstar North</td>
-      <td>9.4</td>
-      <td>20.32</td>
-      <td>6.37</td>
-      <td>9.85</td>
-      <td>0.99</td>
-      <td>3.12</td>
-      <td>2013</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Grand Theft Auto V</td>
-      <td>Action</td>
-      <td>3</td>
-      <td>Rockstar North</td>
-      <td>9.7</td>
-      <td>19.39</td>
-      <td>6.06</td>
-      <td>9.71</td>
-      <td>0.60</td>
-      <td>3.02</td>
-      <td>2014</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Grand Theft Auto: Vice City</td>
-      <td>Action</td>
-      <td>3</td>
-      <td>Rockstar North</td>
-      <td>9.6</td>
-      <td>16.15</td>
-      <td>8.41</td>
-      <td>5.49</td>
-      <td>0.47</td>
-      <td>1.78</td>
-      <td>2002</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Grand Theft Auto V</td>
-      <td>Action</td>
-      <td>3</td>
-      <td>Rockstar North</td>
-      <td>NaN</td>
-      <td>15.86</td>
-      <td>9.06</td>
-      <td>5.33</td>
-      <td>0.06</td>
-      <td>1.42</td>
-      <td>2013</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Call of Duty: Black Ops 3</td>
-      <td>Shooter</td>
-      <td>3</td>
-      <td>Treyarch</td>
-      <td>NaN</td>
-      <td>15.09</td>
-      <td>6.18</td>
-      <td>6.05</td>
-      <td>0.41</td>
-      <td>2.44</td>
-      <td>2015</td>
-      <td>4</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
+**A preview of the dataset for visualization**
+<img src="images/df5.png">
 
 **Dataframe for data analysis**
 
@@ -804,158 +234,278 @@ df_for_training['Genre'] = le.fit_transform(df_for_training['Genre'])
 df_for_training['Developer'] = le.fit_transform(df_for_training['Developer'])
 # Shuffle and reorder the dataframe
 df_for_training = df_for_training.sample(frac=1)[['Genre','ESRB_Rating','Developer','NA_Sales','Year','Global_Sales','Sales_Ranking']]
-df_for_training
+```
+
+**A preview of the dataset for visualizarion**
+<img src="images/df6.png" style="width: 600px;">
+
+### 4.b Data Analysis and Visualization' <a name="data-ana-vis"></a>
+In this section, we will plot processed data and observe the infomation provided by the dataset that can be useful in future analysis.
+
+First, in order to get a general picture of video game sale in recent years, we plot a graph of video game annual sales over year, from 2000 to 2018.
+
+
+```python
+import matplotlib.pyplot as plt
+graph_df1 = df.copy(deep=True)
+
+# Trim the data
+graph_df1 = graph_df1[graph_df1["Year"] >= 2000]
+graph_df1 = graph_df1[graph_df1["Year"] <= 2018]
+
+fig, ax = plt.subplots(figsize=(15,10))
+# Group the data by Year, and plot the sum of Global_Sales at that year.
+graph_df1.groupby(["Year"]).sum()["Global_Sales"].plot(ax=ax)
+plt.xlabel("Year", fontsize = 15)
+plt.ylabel("Number of purchases (Million)", fontsize = 15)
+plt.title("Video Game Annual Sales over Year", fontweight = "bold", fontsize = 18)
+plt.show()
+```
+
+
+    
+![png](README_files/README_22_0.png)
+    
+
+
+Interpretation: The graph we get is a bit unexpected. In our previous prediction, the graph would have a number of
+purchases gradually increase as the year goes, which means as time goes, more games are purchased by people,
+However, as viewed on the graph, the number dramatically decreased after 2011. This is not a reasonable result to accept,
+ hence, we need some explanation on what might happen that caused this result. There are some possible causes for this problem.
+ The dataset may not collect enough game sale data after 2011 since there are more and more video games appear on the market.
+ During the data processing phase, we notice that the dataset failed to record lots of sale data of video games.
+ It has nans on some entries of the Global Sales, NA sales and also data from other regions. As a result,
+ when we clean the data and drop some of those rows with nans, some video game purchases were also lost in the process.
+
+ After looking at the global annual video game sales over years,
+  Therefore, let's plot the top 50 global best-selling games in some years to visualize how video game sales distribute in a year.
+  We choose data in year of 2016, 2017 and 2018, and plot them in three separate graphs.
+
+
+```python
+graph_df2 = df[df["Year"] == 2016].copy(deep = True)
+# Sort values by Global_Sales
+graph_df2 = graph_df2.sort_values(by = "Global_Sales", ascending = False)
+graph_df2 = graph_df2.reset_index(drop = True)
+# Keep first 50 data
+graph_df2 = graph_df2.head(50)
+graph_df2["Rank"] = np.arange(1,51)
+# graph_df2
+```
+
+
+```python
+# Create a horizontal bar plot
+fig = plt.figure(figsize = (15, 10))
+plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
+plt.xlabel("Number of purchases (Million)", fontsize = 15)
+plt.title("TOP 50 Global Best-selling Video Games in 2016", fontweight = "bold", fontsize = 18)
 ```
 
 
 
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Genre</th>
-      <th>ESRB_Rating</th>
-      <th>Developer</th>
-      <th>NA_Sales</th>
-      <th>Year</th>
-      <th>Global_Sales</th>
-      <th>Sales_Ranking</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>3153</th>
-      <td>7</td>
-      <td>0</td>
-      <td>1772</td>
-      <td>0.017418</td>
-      <td>2007</td>
-      <td>0.024126</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>7407</th>
-      <td>17</td>
-      <td>0</td>
-      <td>937</td>
-      <td>0.010246</td>
-      <td>2002</td>
-      <td>0.005908</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>10654</th>
-      <td>15</td>
-      <td>0</td>
-      <td>695</td>
-      <td>0.002049</td>
-      <td>2002</td>
-      <td>0.000985</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>9829</th>
-      <td>0</td>
-      <td>3</td>
-      <td>1558</td>
-      <td>0.004098</td>
-      <td>2007</td>
-      <td>0.001969</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>7877</th>
-      <td>0</td>
-      <td>5</td>
-      <td>331</td>
-      <td>0.010246</td>
-      <td>2016</td>
-      <td>0.005416</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>3049</th>
-      <td>0</td>
-      <td>3</td>
-      <td>1412</td>
-      <td>0.009221</td>
-      <td>2005</td>
-      <td>0.025111</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>5429</th>
-      <td>7</td>
-      <td>3</td>
-      <td>1807</td>
-      <td>0.012295</td>
-      <td>2002</td>
-      <td>0.011324</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>7101</th>
-      <td>5</td>
-      <td>1</td>
-      <td>1271</td>
-      <td>0.013320</td>
-      <td>2007</td>
-      <td>0.006893</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>11286</th>
-      <td>7</td>
-      <td>2</td>
-      <td>125</td>
-      <td>0.001025</td>
-      <td>2005</td>
-      <td>0.000000</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3721</th>
-      <td>0</td>
-      <td>1</td>
-      <td>3</td>
-      <td>0.032787</td>
-      <td>2009</td>
-      <td>0.020187</td>
-      <td>1</td>
-    </tr>
-  </tbody>
-</table>
-<p>11348 rows × 7 columns</p>
-</div>
+    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2016')
 
 
 
-### 4.b Data Analysis and Visualization' <a name="data-ana-vis"></a>
+
+    
+![png](README_files/README_25_1.png)
+    
+
+
+
+```python
+graph_df2 = df[df["Year"] == 2017].copy(deep = True)
+graph_df2 = graph_df2.sort_values(by = "Global_Sales", ascending = False)
+graph_df2 = graph_df2.reset_index(drop = True)
+graph_df2 = graph_df2.head(50)
+graph_df2["Rank"] = np.arange(1,51)
+```
+
+
+```python
+fig = plt.figure(figsize = (15, 10))
+plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
+plt.xlabel("Number of purchases (Million)", fontsize = 15)
+plt.title("TOP 50 Global Best-selling Video Games in 2017", fontweight = "bold", fontsize = 18)
+```
+
+
+
+
+    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2017')
+
+
+
+
+    
+![png](README_files/README_27_1.png)
+    
+
+
+
+```python
+graph_df2 = df[df["Year"] == 2018].copy(deep = True)
+graph_df2 = graph_df2.sort_values(by = "Global_Sales", ascending = False)
+graph_df2 = graph_df2.reset_index(drop = True)
+graph_df2 = graph_df2.head(50)
+graph_df2["Rank"] = np.arange(1,51)
+```
+
+
+```python
+fig = plt.figure(figsize = (15, 10))
+plt.barh(graph_df2["Name"], graph_df2["Global_Sales"])
+plt.xlabel("Number of purchases (Million)", fontsize = 15)
+plt.title("TOP 50 Global Best-selling Video Games in 2018", fontweight = "bold", fontsize = 18)
+```
+
+
+
+
+    Text(0.5, 1.0, 'TOP 50 Global Best-selling Video Games in 2018')
+
+
+
+
+    
+![png](README_files/README_29_1.png)
+    
+
+
+From the graph, we see that the most best-selling video game in 2016 was "FIFA 17", in 2017 was "Call of Duty: WWII", and in the year 2018 was "Red Dead Redemption", followed by "Call of Duty: Black Ops III" and "FIFA 19". Comparing the three plots, we can discover a pattern. It seems that each year, there are a few games that are very successful and receive really high amount of sales. And as rank goes down, the sale will quickly drop at first, and then remain at a relatively mild decreasing slope after the top 15 games.
+
+From the dataset, we also noticed that those games are categorized by different genres. Consequently, we want to find out how different genres are distributed among all video games.
+
+
+```python
+graph_df3 = df.copy(deep=True)
+fig, ax = plt.subplots(figsize=(15,10))
+# Group the data by geners and count all games appeared within those genres.
+temp = graph_df3.groupby(["Genre"]).count()["Name"]
+temp.sort_values(ascending = False).plot(kind = "pie", ax=ax, autopct = '%1.1f%%')
+plt.ylabel("Name of Genres", fontsize = 15)
+plt.title("Percentage of Video Games per Genre", fontweight = "bold", fontsize = 18)
+plt.show()
+```
+
+
+    
+![png](README_files/README_31_0.png)
+    
+
+
+As we observe from the pie chart above, among all video game genres, Action, Sports, Shooter, and Racing video games occupied a great amount of the video game industry (50.4%). It's reasonable to say that those four categories of games have a relatively larger group of customers and popularity among all genres. If a developer wants to start a new game project, these 4 genres are good choices to pick.
+
+Now we want to acquire a general idea of how these popularities of different genres change over the year, i.e. the trends of different video game genres as time goes. We set the time period from 1990 to 2018 and plot the graph.
+
+
+```python
+# Define the range of yuear wo want
+start_year = 1990
+end_year = 2018
+graph_df4 = df.copy(deep=True)
+graph_df4 = graph_df4[graph_df4["Year"] >= start_year]
+graph_df4 = graph_df4[graph_df4["Year"] <= end_year].reset_index(drop = True)
+
+# Define a dataframe with year as columns and genre as rows, and set all counts to zero
+graph4 = pd.DataFrame(index = graph_df4["Genre"].unique(), columns = range(start_year, end_year+1))
+graph4 = graph4.fillna(value = 0)
+
+# Counting all games and update corresponding cells
+for i in range(0,len(graph_df4)):
+    graph4.loc[graph_df4.iloc[i].Genre, graph_df4.iloc[i].Year] = graph4.loc[graph_df4.iloc[i].Genre, graph_df4.iloc[i].Year] + 1
+```
+
+
+```python
+graph4.T.plot(grid = True, figsize=(15,10))
+plt.title("Number of Games in Different Genres from 1900 to 2018", fontweight = "bold", fontsize = 18)
+plt.ylabel("Number of Games", fontsize = 15)
+plt.xlabel("Year", fontsize = 15)
+```
+
+
+
+
+    Text(0.5, 0, 'Year')
+
+
+
+
+    
+![png](README_files/README_34_1.png)
+    
+
+
+Let's further specify the graph and look at the trends of the 5 most popular genres, among all of the genres.
+
+
+```python
+graph4a = pd.DataFrame()
+graph4a["Action"] = graph4.loc["Action"]
+graph4a["Sports"] = graph4.loc["Sports"]
+graph4a["Shooter"] = graph4.loc["Shooter"]
+graph4a["Racing"] = graph4.loc["Racing"]
+graph4a["Misc"] = graph4.loc["Misc"]
+graph4a = graph4a.transpose()
+graph4a.T.plot(grid = True, figsize=(15,10))
+plt.title("Number of Games in Top 5 Genres from 1900 to 2018", fontweight = "bold", fontsize = 18)
+plt.ylabel("Number of Games", fontsize = 15)
+plt.xlabel("Year", fontsize = 15)
+```
+
+
+
+
+    Text(0.5, 0, 'Year')
+
+
+
+
+    
+![png](README_files/README_36_1.png)
+    
+
+
+Interpretation:
+ - Shape of the graph: We see from the major left part of the graph that games in those genres have grown a lot since 1990, especially for the top 5 genres, which are growing almost at exponential. Most of the other genres experienced a linear growth, and a few unpopular genres have very limited growth.
+ - Further on dataset issues discussed above: From the dataset, we obtain the graphs that have similar shapes to the first graph (Global Sales vs. Year). However, this time we are not adding up sales, but just counting numbers of games instead. Both plots have sharp decrement after 2010, therefore, it's reasonable to identify that there are a large amount of video game sale data not collected after 2010.
+
+Also, our global sales amount was contributed by sales in 4 regions: NA, PAL, JP, and others. North America is a large market that all video game developers will definitely consider. Therefore, we want to learn whether or not video game sales in North American have a positive correlation with sales in the global market. Below you will see a scatter plot about North America Sales versus Global Sales.
+
+
+```python
+graph_df5 = df.copy(deep=True)
+graph_df5 = graph_df5[graph_df5["NA_Sales"].notna()]
+
+plt.figure(figsize = (15,10))
+x = graph_df5["NA_Sales"]
+y = graph_df5["Global_Sales"]
+plt.scatter(x, y)
+plt.title("North America Sales vs. Global Sales", fontsize = 20)
+plt.xlabel("North America Sales (Million)", fontsize = 20)
+plt.ylabel("Global Sales (Million)", fontsize = 20)
+fit = np.polyfit(x = x, y = y, deg = 1)
+plt.plot(x, fit[0] * x + fit[1], color="red")
+```
+
+
+
+
+    [<matplotlib.lines.Line2D at 0x2910ac136a0>]
+
+
+
+
+    
+![png](README_files/README_38_1.png)
+    
+
+
+From the graph, we see lots of data points are located at the lower-left corner. This is because we set the sale amount in millions, and many video games in the industry do not have sales large enough. We discover that there exists a positive correlation between North America Sales and Global Sales. This indicates that the increment or decrement of video game sales in North America may lead to similar movements in global markets. And there is a form of dependence between the global market and the North American market, so the data collected in NA could also be used in the prediction of the global market.
 
 ## 5. Machine Learning Model <a name="ml-model"></a>
 In this section, we are going to implement several models and predict global sales. In the world of machine learning, people
@@ -1057,8 +607,8 @@ print('The average score for linear regression is ',np.average(linear_score))
 print("The standard error of the score is ", np.std(linear_score))
 ```
 
-    The average score for linear regression is  0.8329380526739645
-    The standard error of the score is  0.044375140974953854
+    The average score for linear regression is  0.8410116950650812
+    The standard error of the score is  0.034909738244821714
     
 
 
@@ -1076,12 +626,12 @@ print("The average score for SVM is ", np.average(svm_score))
 print("The standard error of the score is ", np.std(svm_score))
 ```
 
-    The average score for Random Forest is  0.9443951860398265
-    The standard error of the score is  0.006578077092256287
-    The average score for kNN is  0.8731059988035025
-    The standard error of the score is  0.005475860780734276
-    The average score for SVM is  0.8992760413024732
-    The standard error of the score is  0.01149247828173759
+    The average score for Random Forest is  0.9441310242484985
+    The standard error of the score is  0.006005405576620894
+    The average score for kNN is  0.8712562447070523
+    The standard error of the score is  0.005861116764862995
+    The average score for SVM is  0.8885270649294144
+    The standard error of the score is  0.0138320242188629
     
 
 ### 5.c Result Anlysis and Demonstration <a name="result-and-demon"></a>
@@ -1106,7 +656,7 @@ plt.show()
 
 
     
-![png](README_files/README_29_0.png)
+![png](README_files/README_52_0.png)
     
 
 
@@ -1143,7 +693,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for random forest  has the following result
-    test statistics = 7.85 
+    test statistics = 7.883 
     p value = 0.0
     
 
@@ -1157,7 +707,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for k-nearest neightbor has the following result
-    test statistics = 22.912 
+    test statistics = 23.013 
     p value = 0.0
     
 
@@ -1171,7 +721,7 @@ print(f'test statistics = {np.round(statistics,3)} \np value = {np.round(pvalue,
 ```
 
     paired t-test for support vector machine has the following result
-    test statistics = 39.691 
+    test statistics = 37.174 
     p value = 0.0
     
 
@@ -1184,6 +734,18 @@ make sense when it comes to category. You can think it as using l2 loss (mean sq
 we'd better directly use accuracy score for model-model comparison.
 
 ## 6. Future Application <a name="future-app"></a>
+Given the accuracy of 4 models, we recommend to predict future games with random forest model. Suppose you have a new game
+ with input data called new_game. You can predict its sale with the following command:
+```
+random_forest.predict(X = new_game)
+```
+The result will be a number and the smaller the number is, the more it will be sold. Also, if you really hope to get a
+specific number, you can run this line:
+```
+muti_linear_regression.predict(new_game)
+```
+It will provide you a estimated sale number. Please don't feel frustrated if the predicted value is zero. Remember, the
+sale prediction is in million. If you are a independent game developer, selling a couple of thousand of game is great!
 
 ## 7. Reference and External Link <a name="ref-and-extlink"></a>
 #### Gaming industry statistics
